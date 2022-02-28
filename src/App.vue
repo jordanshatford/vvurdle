@@ -1,3 +1,3 @@
 <template>
-  <header>Vurdle</header>
+  <header>VVurdle</header>
 </template>
