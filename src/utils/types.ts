@@ -29,14 +29,21 @@ export enum ValidKey {
   BACKSPACE = "BACKSPACE",
 }
 
-export enum KeyState {
+export enum EvaluationState {
   UNKNOWN = "unknown",
   ABSENT = "absent",
   PRESENT = "present",
   CORRECT = "correct",
+  MULTIPLE = "multiple",
 }
 
 export interface KeyInfo {
   key: ValidKey
-  state: KeyState
+  state: EvaluationState
+}
+
+export interface CellInfo {
+  value: string
+  state: EvaluationState
+  wiggle?: boolean
 }

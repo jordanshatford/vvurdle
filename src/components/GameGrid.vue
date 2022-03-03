@@ -1,0 +1,36 @@
+<template>
+  <main class="gameboard">
+    <section class="gameboard__content">
+      <game-board-cell
+        v-for="(cell, index) in board"
+        :value="cell.value"
+        :state="cell.state"
+        :wiggle="cell.wiggle"
+        :key="index"
+      />
+    </section>
+  </main>
+</template>
+
+<script setup lang="ts">
+import GameBoardCell from "@/components/GameGridCell.vue"
+import type { CellInfo } from "@/utils/types"
+
+interface Props {
+  board: CellInfo[]
+}
+
+defineProps<Props>()
+</script>
+
+<style lang="scss" scoped>
+.gameboard {
+  display: flex;
+  justify-content: center;
+  &__content {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+</style>
