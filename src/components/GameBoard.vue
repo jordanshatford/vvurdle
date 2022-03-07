@@ -1,5 +1,5 @@
 <template>
-  <game-grid :board="board" :wordLength="wordLength" />
+  <game-grid :board="board.value" :width="board.width" />
   <game-keyboard :keyboard="keyboard" @keypress="handleKeyPress" />
 </template>
 
@@ -7,9 +7,9 @@
 import { ref, watch } from "vue"
 import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
-import { initializeBoard } from "@/utils/funcs"
-import { ValidKey, EvaluationState, type CellInfo, type GameResult, GameStatus } from "@/utils/types"
+import { ValidKey, EvaluationState, type GameResult, GameStatus } from "@/utils/types"
 import { useKeyboard } from "@/composables/use-keyboard"
+import { useBoard } from "@/composables/use-board"
 
 interface Props {
   gameOver: boolean
@@ -26,72 +26,55 @@ const rightWOrd = "VALVE"
 const validWords = [rightWOrd, "PIZZA", "VALUE"]
 const wordLength = rightWOrd.length
 const totalGuesses = rightWOrd.length + 1
-const currentRow = ref<number>(0)
-const board = ref<CellInfo[]>(initializeBoard(wordLength, totalGuesses))
-
+const {
+  board,
+  currentRow,
+  currentRowComplete,
+  nextEmptyCell,
+  nextUnevaluatedCell,
+  inputtedWord,
+  updateCell,
+  clearLastCellWithLetter,
+} = useBoard({
+  width: wordLength,
+  length: totalGuesses,
+})
 const { keyboard, updateKeyState } = useKeyboard()
 
 function handleKeyPress(key: ValidKey) {
   if (props.gameOver) {
     return
   }
-  const nextEmptySlot = board.value.findIndex((cell) => cell.value === ValidKey.BLANK)
   switch (key) {
     case ValidKey.BACKSPACE:
-      return handleBackspace(nextEmptySlot)
+      clearLastCellWithLetter()
+      break
     case ValidKey.ENTER:
-      return handleEnter(nextEmptySlot)
-    default: {
-      const isCurrentRow = Math.floor(nextEmptySlot / wordLength) === currentRow.value
-      if (isCurrentRow) {
-        board.value[nextEmptySlot].value = key
-      }
-    }
+      handleEnter()
+      break
+    default:
+      updateCell(nextEmptyCell.value, { value: key })
+      break
   }
 }
 
-function handleBackspace(nextEmptySlot: number) {
-  if (nextEmptySlot === -1) {
-    // All board cells are filled so make last cell blank
-    return (board.value[board.value.length - 1].value = ValidKey.BLANK)
-  }
-  const isCurrentRow = Math.floor((nextEmptySlot - 1) / wordLength) === currentRow.value
-  if (isCurrentRow) {
-    const lastNonEmptyCell = board.value.filter((cell) => cell.value !== ValidKey.BLANK).length - 1
-    board.value[lastNonEmptyCell].value = ValidKey.BLANK
-  }
-}
-
-function getInputtedWord(row: number) {
-  let word = ""
-  const startIndex = row * wordLength
-  for (let i = startIndex; i < startIndex + wordLength; i++) {
-    word += board.value[i].value
-  }
-  return word
-}
-
-function handleEnter(nextEmptySlot: number) {
-  const index = nextEmptySlot === -1 ? wordLength * totalGuesses : nextEmptySlot
-  const row = Math.floor((index - 1) / wordLength)
-  const isCurrentRow = row === currentRow.value
-  const rowComplete = index % wordLength === 0
-  if (isCurrentRow && rowComplete) {
-    let inputWord = getInputtedWord(row)
-    if (validWords.includes(inputWord)) {
+function handleEnter() {
+  if (currentRowComplete.value) {
+    if (validWords.includes(inputtedWord.value)) {
+      evaluateInputtedWord(inputtedWord.value)
       currentRow.value++
-      evaluateInputtedWord(inputWord)
     } else {
       errors.value.unshift("Not in word list")
+      console.log("NOT IN LIST")
     }
   } else {
     errors.value.unshift("Not enough letters")
+    console.log("NOT ENOUGH")
   }
 }
 
 function evaluateInputtedWord(input: string) {
-  const nextToEvaluateIndex = board.value.findIndex((cell) => cell.state === EvaluationState.UNKNOWN)
-  handleBoardEvaluation(input, nextToEvaluateIndex)
+  handleBoardEvaluation(input, nextUnevaluatedCell.value)
   const isCorrect = input === rightWOrd
   if (isCorrect) {
     emits("gameover", {
@@ -139,7 +122,7 @@ function handleBoardEvaluation(input: string, index: number) {
     } else {
       evaluation = EvaluationState.ABSENT
     }
-    board.value[index + lIndex].state = evaluation
+    updateCell(index + lIndex, { state: evaluation })
     updateKeyState(letter as ValidKey, evaluation)
   })
 }
@@ -153,12 +136,12 @@ watch(
     const startIndex = currentRow.value * wordLength
     const endIndex = startIndex + wordLength
     for (let i = startIndex; i < endIndex; i++) {
-      board.value[i].wiggle = true
+      updateCell(i, { wiggle: true })
     }
     setTimeout(() => {
       errors.value.pop()
       for (let i = startIndex; i < endIndex; i++) {
-        board.value[i].wiggle = false
+        updateCell(i, { wiggle: false })
       }
     }, 1500)
   }
@@ -166,6 +149,6 @@ watch(
 
 function getScore(row: number, totalGuesses: number) {
   const totalScore = 100
-  return 100 - (totalScore / (totalGuesses - 1)) * (row - 1)
+  return 100 - (totalScore / (totalGuesses - 1)) * row
 }
 </script>

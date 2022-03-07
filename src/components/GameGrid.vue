@@ -18,13 +18,13 @@ import type { CellInfo } from "@/utils/types"
 
 interface Props {
   board: CellInfo[]
-  wordLength: number
+  width: number
 }
 
 const props = defineProps<Props>()
 
 const style = {
-  gridTemplateColumns: `repeat(${props.wordLength}, 1fr)`,
+  gridTemplateColumns: `repeat(${props.width}, 1fr)`,
 }
 </script>
 
