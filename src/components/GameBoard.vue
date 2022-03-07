@@ -7,9 +7,10 @@
 import { ref, watch } from "vue"
 import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
-import { ValidKey, EvaluationState, type GameResult, GameStatus } from "@/utils/types"
+import { ValidKey, type GameResult, GameStatus } from "@/utils/types"
 import { useKeyboard } from "@/composables/use-keyboard"
 import { useBoard } from "@/composables/use-board"
+import { useWordle } from "@/composables/use-wordle"
 
 interface Props {
   gameOver: boolean
@@ -22,10 +23,7 @@ const emits = defineEmits<{
 }>()
 
 const errors = ref<string[]>([])
-const rightWOrd = "VALVE"
-const validWords = [rightWOrd, "PIZZA", "VALUE"]
-const wordLength = rightWOrd.length
-const totalGuesses = rightWOrd.length + 1
+const { word, numGuesses, isValid, isCorrect, getScore, getEvaluations } = useWordle()
 const {
   board,
   currentRow,
@@ -36,8 +34,8 @@ const {
   updateCell,
   clearLastCellWithLetter,
 } = useBoard({
-  width: wordLength,
-  length: totalGuesses,
+  width: word.length,
+  length: numGuesses.value,
 })
 const { keyboard, updateKeyState } = useKeyboard()
 
@@ -60,7 +58,7 @@ function handleKeyPress(key: ValidKey) {
 
 function handleEnter() {
   if (currentRowComplete.value) {
-    if (validWords.includes(inputtedWord.value)) {
+    if (isValid(inputtedWord.value)) {
       evaluateInputtedWord(inputtedWord.value)
       currentRow.value++
     } else {
@@ -74,57 +72,29 @@ function handleEnter() {
 }
 
 function evaluateInputtedWord(input: string) {
-  handleBoardEvaluation(input, nextUnevaluatedCell.value)
-  const isCorrect = input === rightWOrd
-  if (isCorrect) {
+  const index = nextUnevaluatedCell.value
+  const evaluations = getEvaluations(input)
+  evaluations.forEach((evaluation, letterIndex) => {
+    updateCell(index + letterIndex, { state: evaluation })
+    updateKeyState(input[letterIndex] as ValidKey, evaluation)
+  })
+  if (isCorrect(input)) {
     emits("gameover", {
       status: GameStatus.WIN,
-      word: rightWOrd,
+      word: word,
       guesses: currentRow.value,
-      score: getScore(currentRow.value, totalGuesses),
+      score: getScore(currentRow.value),
     })
     return
   }
-  if (currentRow.value === totalGuesses) {
+  if (currentRow.value === numGuesses.value) {
     emits("gameover", {
       status: GameStatus.LOSS,
-      word: rightWOrd,
+      word: word,
       guesses: currentRow.value,
-      score: getScore(currentRow.value, totalGuesses),
+      score: 0,
     })
   }
-}
-
-function handleBoardEvaluation(input: string, index: number) {
-  const inputArray = input.split("")
-  const wordArray = rightWOrd.split("")
-  let evaluation = EvaluationState.UNKNOWN
-  inputArray.forEach((letter, lIndex) => {
-    if (letter === wordArray[lIndex]) {
-      evaluation = EvaluationState.CORRECT
-      const multiple = wordArray.filter((v) => v === letter)
-      if (multiple.length > 1) {
-        const [multipleLetter] = multiple
-        const guess = inputArray.filter((v) => v === multipleLetter)
-        if (guess.length !== multiple.length) {
-          if (guess.length <= multiple.length) {
-            const [guessLetter] = guess
-            inputArray.forEach((letter) => {
-              if (letter === guessLetter) {
-                evaluation = EvaluationState.MULTIPLE
-              }
-            })
-          }
-        }
-      }
-    } else if (wordArray.includes(letter)) {
-      evaluation = EvaluationState.PRESENT
-    } else {
-      evaluation = EvaluationState.ABSENT
-    }
-    updateCell(index + lIndex, { state: evaluation })
-    updateKeyState(letter as ValidKey, evaluation)
-  })
 }
 
 watch(
@@ -133,8 +103,8 @@ watch(
     if (oldValue.length < newValue.length) {
       return
     }
-    const startIndex = currentRow.value * wordLength
-    const endIndex = startIndex + wordLength
+    const startIndex = currentRow.value * word.length
+    const endIndex = startIndex + word.length
     for (let i = startIndex; i < endIndex; i++) {
       updateCell(i, { wiggle: true })
     }
@@ -146,9 +116,4 @@ watch(
     }, 1500)
   }
 )
-
-function getScore(row: number, totalGuesses: number) {
-  const totalScore = 100
-  return 100 - (totalScore / (totalGuesses - 1)) * row
-}
 </script>
