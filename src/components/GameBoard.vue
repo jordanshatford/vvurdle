@@ -7,8 +7,9 @@
 import { ref, watch } from "vue"
 import GameBoard from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
-import { initializeKeyboard, initializeBoard } from "@/utils/funcs"
-import { type KeyInfo, ValidKey, EvaluationState, type CellInfo, type GameResult, GameStatus } from "@/utils/types"
+import { initializeBoard } from "@/utils/funcs"
+import { ValidKey, EvaluationState, type CellInfo, type GameResult, GameStatus } from "@/utils/types"
+import { useKeyboard } from "@/composables/use-keyboard"
 
 interface Props {
   gameOver: boolean
@@ -27,7 +28,8 @@ const wordLength = rightWOrd.length
 const totalGuesses = rightWOrd.length + 1
 const currentRow = ref<number>(0)
 const board = ref<CellInfo[]>(initializeBoard(wordLength, totalGuesses))
-const keyboard = ref<KeyInfo[]>(initializeKeyboard())
+
+const { keyboard, updateKeyState } = useKeyboard()
 
 function handleKeyPress(key: ValidKey) {
   if (props.gameOver) {
@@ -138,13 +140,7 @@ function handleBoardEvaluation(input: string, index: number) {
       evaluation = EvaluationState.ABSENT
     }
     board.value[index + lIndex].state = evaluation
-    const key = keyboard.value.find((value) => value.key === letter)
-    if (key) {
-      if ((evaluation as EvaluationState) === EvaluationState.MULTIPLE) {
-        evaluation = EvaluationState.CORRECT
-      }
-      key.state = evaluation
-    }
+    updateKeyState(letter as ValidKey, evaluation)
   })
 }
 
