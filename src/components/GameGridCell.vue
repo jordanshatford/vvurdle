@@ -14,15 +14,16 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { EvaluationState } from "@/utils/types"
+import { EvaluationState, ValidKey } from "@/utils/types"
 
 interface Props {
-  value: string
+  value: ValidKey
   state: EvaluationState
   wiggle?: boolean
 }
 
 const props = defineProps<Props>()
+
 const flip = computed<boolean>(() => {
   return [EvaluationState.ABSENT, EvaluationState.PRESENT, EvaluationState.MULTIPLE, EvaluationState.CORRECT].includes(
     props.state

@@ -1,6 +1,6 @@
 <template>
   <main class="gameboard">
-    <section class="gameboard__content">
+    <section class="gameboard__content" :style="style">
       <game-board-cell
         v-for="(cell, index) in board"
         :value="cell.value"
@@ -18,9 +18,14 @@ import type { CellInfo } from "@/utils/types"
 
 interface Props {
   board: CellInfo[]
+  wordLength: number
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const style = {
+  gridTemplateColumns: `repeat(${props.wordLength}, 1fr)`,
+}
 </script>
 
 <style lang="scss" scoped>
@@ -30,7 +35,6 @@ defineProps<Props>()
   &__content {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(5, 1fr);
   }
 }
 </style>

@@ -27,6 +27,7 @@ export enum ValidKey {
   Z = "Z",
   ENTER = "ENTER",
   BACKSPACE = "BACKSPACE",
+  BLANK = "",
 }
 
 export enum EvaluationState {
@@ -43,7 +44,19 @@ export interface KeyInfo {
 }
 
 export interface CellInfo {
-  value: string
+  value: ValidKey
   state: EvaluationState
   wiggle?: boolean
+}
+
+export enum GameStatus {
+  WIN = "win",
+  LOSS = "loss",
+}
+
+export interface GameResult {
+  status: GameStatus
+  word: string
+  guesses: number
+  score: number
 }

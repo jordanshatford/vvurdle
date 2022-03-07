@@ -1,12 +1,20 @@
 <template>
   <div class="app">
     <header>VVurdle</header>
-    <game />
+    <game-board :gameOver="gameOver" @gameover="handle" />
   </div>
 </template>
 
 <script setup lang="ts">
-import Game from "@/components/GameBoard.vue"
+import GameBoard from "@/components/GameBoard.vue"
+import { ref } from "vue"
+
+const gameOver = ref<boolean>(false)
+
+function handle(x: any) {
+  gameOver.value = true
+  console.log({ x })
+}
 </script>
 
 <style lang="scss">

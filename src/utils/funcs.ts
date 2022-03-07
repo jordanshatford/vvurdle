@@ -36,8 +36,8 @@ export function initializeKeyboard(): KeyInfo[] {
   })
 }
 
-export function initializeBoard() {
-  return [...Array(30)].map(() => {
-    return { value: "", state: EvaluationState.UNKNOWN, wiggle: false }
+export function initializeBoard(wordLength: number, totalGuesses: number) {
+  return [...Array(wordLength * totalGuesses)].map(() => {
+    return { value: ValidKey.BLANK, state: EvaluationState.UNKNOWN, wiggle: false }
   })
 }
