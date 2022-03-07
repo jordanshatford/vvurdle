@@ -1,11 +1,11 @@
 <template>
-  <game-board :board="board" :wordLength="wordLength" />
+  <game-grid :board="board" :wordLength="wordLength" />
   <game-keyboard :keyboard="keyboard" @keypress="handleKeyPress" />
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue"
-import GameBoard from "@/components/GameGrid.vue"
+import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
 import { initializeBoard } from "@/utils/funcs"
 import { ValidKey, EvaluationState, type CellInfo, type GameResult, GameStatus } from "@/utils/types"

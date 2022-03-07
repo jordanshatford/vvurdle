@@ -1,7 +1,7 @@
 import { ref } from "vue"
 import { EvaluationState, ValidKey, type KeyInfo } from "@/utils/types"
 
-export function initializeKeyboard(): KeyInfo[] {
+export function initialize(): KeyInfo[] {
   const keys = [
     ValidKey.Q,
     ValidKey.W,
@@ -38,7 +38,7 @@ export function initializeKeyboard(): KeyInfo[] {
 }
 
 export function useKeyboard() {
-  const keyboard = ref(initializeKeyboard())
+  const keyboard = ref(initialize())
 
   function updateKeyState(key: ValidKey, state: EvaluationState) {
     const k = keyboard.value.find((value) => value.key === key)
@@ -52,7 +52,7 @@ export function useKeyboard() {
   }
 
   function reset() {
-    keyboard.value = initializeKeyboard()
+    keyboard.value = initialize()
   }
 
   return {
