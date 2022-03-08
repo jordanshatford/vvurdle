@@ -21,7 +21,7 @@ const emit = defineEmits<{
 </script>
 
 <style scoped lang="scss">
-@import "./src/assets/scss/variables";
+@import "./src/scss/variables";
 .gameheader {
   width: 100%;
   display: flex;

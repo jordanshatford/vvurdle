@@ -30,7 +30,7 @@ const classObj = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@import "./src/assets/scss/variables";
+@import "./src/scss/variables";
 .gamekeyboard__key {
   cursor: pointer;
   user-select: none;

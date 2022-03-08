@@ -32,7 +32,7 @@ const flip = computed<boolean>(() => {
 </script>
 
 <style scoped lang="scss">
-@import "./src/assets/scss/variables";
+@import "./src/scss/variables";
 .gameboard {
   &__cell {
     user-select: none;

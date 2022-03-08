@@ -19,7 +19,7 @@ function handle(result: GameResult) {
 </script>
 
 <style lang="scss">
-@import "./src/assets/scss/variables";
+@import "./src/scss/variables";
 body {
   background-color: $color-background;
   padding: 0;

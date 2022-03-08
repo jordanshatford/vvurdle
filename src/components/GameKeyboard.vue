@@ -64,7 +64,7 @@ function handleKeyupEvent(event: KeyboardEvent) {
 </script>
 
 <style scoped lang="scss">
-@import "./src/assets/scss/variables";
+@import "./src/scss/variables";
 .gamekeyboard {
   margin-top: 1rem;
   &__row {
