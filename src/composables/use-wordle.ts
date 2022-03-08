@@ -29,10 +29,10 @@ const allWords = [
   ...american35,
   ...american40,
 ]
-const uniqueWords = [...new Set(allWords)].map(w => w.toUpperCase())
+const uniqueWords = [...new Set(allWords)].map((w) => w.toUpperCase())
 
 function getWord(words: string[]) {
-  const randomWord = words[Math.floor(Math.random() * words.length)];
+  const randomWord = words[Math.floor(Math.random() * words.length)]
   if (import.meta.env.DEV) {
     console.info("The word to guess is:", randomWord)
   }
@@ -40,7 +40,7 @@ function getWord(words: string[]) {
 }
 
 function getValidWords(length: number) {
-  const filteredWords = uniqueWords.filter(w => w.length === length)
+  const filteredWords = uniqueWords.filter((w) => w.length === length)
   return filteredWords
 }
 

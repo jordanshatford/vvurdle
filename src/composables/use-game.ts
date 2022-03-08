@@ -1,8 +1,8 @@
 import { ref, watch } from "vue"
-import { useKeyboard } from "@/composables/use-keyboard";
-import { useBoard } from "@/composables/use-board";
-import { GameStatus, type ValidKey } from "@/utils/types";
-import { useWordle } from "./use-wordle";
+import { useKeyboard } from "@/composables/use-keyboard"
+import { useBoard } from "@/composables/use-board"
+import { GameStatus, type ValidKey } from "@/utils/types"
+import { useWordle } from "./use-wordle"
 
 export function useGame() {
   const { word, numGuesses, isValid, isCorrect, getScore, getEvaluations, reset: resetWordle } = useWordle()
@@ -57,7 +57,6 @@ export function useGame() {
     resetWordle()
   }
 
-
   function evaluateInputtedWord(input: string) {
     const index = nextUnevaluatedCell.value
     const evaluations = getEvaluations(input)
@@ -71,7 +70,7 @@ export function useGame() {
         word: word.value,
         guesses: currentRow.value + 1,
         score: getScore(currentRow.value),
-        cheated: cheated.value
+        cheated: cheated.value,
       })
       return
     }
@@ -81,7 +80,7 @@ export function useGame() {
         word: word.value,
         guesses: currentRow.value + 1,
         score: 0,
-        cheated: cheated.value
+        cheated: cheated.value,
       })
     }
   }

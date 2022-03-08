@@ -1,5 +1,11 @@
 <template>
-  <game-header @reset="reset"></game-header>
+  <transition name="fade-modal">
+    <v-modal v-if="showSettingsModal" @close="showSettingsModal = false">
+      <p class="gameboard__text">Reveal the current word?</p>
+      <blurred-word @unblur="cheated = true">{{ word }}</blurred-word>
+    </v-modal>
+  </transition>
+  <game-header @opensettings="showSettingsModal = true" @reset="reset"></game-header>
   <game-grid :board="board.value" :width="board.width"></game-grid>
   <game-keyboard
     :keyboard="keyboard"
@@ -15,7 +21,28 @@ import { ref } from "vue"
 import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
 import GameHeader from "@/components/GameHeader.vue"
+import BlurredWord from "@/components/BlurredWord.vue"
+import VModal from "@/components/VModal.vue"
 import { useGame } from "@/composables/use-game"
 
-const { gameOver, keyboard, board, handleBackspace, handleKeypress, handleSubmit, reset } = useGame()
+const { word, gameOver, cheated, keyboard, board, handleBackspace, handleKeypress, handleSubmit, reset } = useGame()
+
+const showSettingsModal = ref<boolean>(false)
 </script>
+
+<style scoped lang="scss">
+@import "./src/scss/variables";
+.gameboard {
+  &__text {
+    color: $color-text;
+  }
+}
+.fade-modal-enter-active,
+.fade-modal-leave-active {
+  transition: all 0.75s ease-in-out;
+}
+.fade-modal-enter-from,
+.fade-modal-leave-to {
+  opacity: 0;
+}
+</style>
