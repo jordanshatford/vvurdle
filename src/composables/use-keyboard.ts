@@ -47,8 +47,9 @@ export function useKeyboard() {
     }
     if ((state as EvaluationState) === EvaluationState.MULTIPLE) {
       k.state = EvaluationState.CORRECT
+    } else {
+      k.state = state
     }
-    k.state = state
   }
 
   function reset() {
