@@ -1,20 +1,53 @@
 import { EvaluationState } from "@/utils/types"
 import { computed, ref } from "vue"
+import {
+  english10,
+  english20,
+  english35,
+  english40,
+  canadian10,
+  canadian20,
+  canadian35,
+  canadian40,
+  american10,
+  american20,
+  american35,
+  american40,
+} from "wordlist-js"
 
-function getWord(length: number) {
-  const word = "VALVE"
-  return word
+const allWords = [
+  ...english10,
+  ...english20,
+  ...english35,
+  ...english40,
+  ...canadian10,
+  ...canadian20,
+  ...canadian35,
+  ...canadian40,
+  ...american10,
+  ...american20,
+  ...american35,
+  ...american40,
+]
+const uniqueWords = [...new Set(allWords)].map(w => w.toUpperCase())
+
+function getWord(words: string[]) {
+  const randomWord = words[Math.floor(Math.random() * words.length)];
+  if (import.meta.env.DEV) {
+    console.info("The word to guess is:", randomWord)
+  }
+  return randomWord
 }
 
 function getValidWords(length: number) {
-  const validWords = ["VALVE", "PIZZA", "VALUE"]
-  return validWords
+  const filteredWords = uniqueWords.filter(w => w.length === length)
+  return filteredWords
 }
 
 export function useWordle(len = 5) {
   const length = ref(len)
-  const word = ref(getWord(length.value))
   const validWords = ref(getValidWords(length.value))
+  const word = ref(getWord(validWords.value))
 
   const numGuesses = computed(() => {
     return word.value.length + 1
@@ -66,8 +99,8 @@ export function useWordle(len = 5) {
   }
 
   function reset() {
-    word.value = getWord(length.value)
     validWords.value = getValidWords(length.value)
+    word.value = getWord(validWords.value)
   }
 
   return {

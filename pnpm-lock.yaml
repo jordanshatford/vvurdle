@@ -16,10 +16,12 @@ specifiers:
   vite: ^2.8.4
   vue: ^3.2.31
   vue-tsc: ^0.31.4
+  wordlist-js: ^1.2.1
 
 dependencies:
   phosphor-vue: 4.4.0_vue@3.2.31
   vue: 3.2.31
+  wordlist-js: 1.2.1
 
 devDependencies:
   '@rushstack/eslint-patch': 1.1.0
@@ -2013,6 +2015,10 @@ packages:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /wordlist-js/1.2.1:
+    resolution: {integrity: sha512-pIDn1mFMk51aepj61K8Kucl+H2eUatjIiwJhOwGSPzjRk27j7+ZHUXV5lOGVGuEQfciLB5wTpFrztiVlHyZbHA==}
+    dev: false
 
   /wrappy/1.0.2:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
