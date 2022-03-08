@@ -1,12 +1,20 @@
 <template>
+  <game-header></game-header>
   <game-grid :board="board.value" :width="board.width" />
-  <game-keyboard :keyboard="keyboard" @keypress="handleKeyPress" />
+  <game-keyboard
+    :keyboard="keyboard"
+    :disabled="gameOver"
+    @backspace="clearLastCellWithLetter()"
+    @enter="handleEnter()"
+    @keypress="(key) => updateCell(nextEmptyCell, { value: key })"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue"
 import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
+import GameHeader from "@/components/GameHeader.vue"
 import { ValidKey, type GameResult, GameStatus } from "@/utils/types"
 import { useKeyboard } from "@/composables/use-keyboard"
 import { useBoard } from "@/composables/use-board"
@@ -39,23 +47,6 @@ const {
 })
 const { keyboard, updateKeyState } = useKeyboard()
 
-function handleKeyPress(key: ValidKey) {
-  if (props.gameOver) {
-    return
-  }
-  switch (key) {
-    case ValidKey.BACKSPACE:
-      clearLastCellWithLetter()
-      break
-    case ValidKey.ENTER:
-      handleEnter()
-      break
-    default:
-      updateCell(nextEmptyCell.value, { value: key })
-      break
-  }
-}
-
 function handleEnter() {
   if (currentRowComplete.value) {
     if (isValid(inputtedWord.value)) {
@@ -87,7 +78,7 @@ function evaluateInputtedWord(input: string) {
     })
     return
   }
-  if (currentRow.value === numGuesses.value) {
+  if (currentRow.value === numGuesses.value - 1) {
     emits("gameover", {
       status: GameStatus.LOSS,
       word: word,

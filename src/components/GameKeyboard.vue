@@ -13,11 +13,14 @@ import { type KeyInfo, ValidKey } from "@/utils/types"
 
 interface Props {
   keyboard: KeyInfo[]
+  disabled?: boolean
 }
 
 const props = defineProps<Props>()
 
 const emits = defineEmits<{
+  (e: "backspace"): void
+  (e: "enter"): void
   (e: "keypress", key: ValidKey): void
 }>()
 
@@ -34,7 +37,20 @@ const keyboardLayout = computed(() => {
 })
 
 function handleKeypress(key: ValidKey) {
-  emits("keypress", key)
+  if (props.disabled) {
+    return
+  }
+  switch (key) {
+    case ValidKey.BACKSPACE:
+      emits("backspace")
+      break
+    case ValidKey.ENTER:
+      emits("enter")
+      break
+    default:
+      emits("keypress", key)
+      break
+  }
 }
 
 function handleKeyupEvent(event: KeyboardEvent) {
