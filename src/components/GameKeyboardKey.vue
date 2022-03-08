@@ -1,6 +1,6 @@
 <template>
   <div class="gamekeyboard__key" :class="classObj" @click="emits('click', value.key)">
-    <ph-backspace v-if="value.key === ValidKey.BACKSPACE" :size="24" weight="fill" />
+    <ph-backspace v-if="value.key === ValidKey.BACKSPACE" :size="24" weight="fill"></ph-backspace>
     <span v-else>{{ value.key }}</span>
   </div>
 </template>

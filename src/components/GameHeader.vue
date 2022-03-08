@@ -1,10 +1,10 @@
 <template>
   <main class="gameheader">
     <section class="gameheader__section">
-      <ph-question :size="28" @click="emit('openhelp')"></ph-question>
-      <ph-chart-bar :size="28" @click="emit('openstats')"></ph-chart-bar>
-      <ph-gear :size="28" @click="emit('opensettings')"></ph-gear>
-      <ph-arrow-counter-clockwise :size="28" @click="emit('reset')"></ph-arrow-counter-clockwise>
+      <ph-question :size="28" @click="emits('openhelp')"></ph-question>
+      <ph-chart-bar :size="28" @click="emits('openstats')"></ph-chart-bar>
+      <ph-gear :size="28" @click="emits('opensettings')"></ph-gear>
+      <ph-arrow-counter-clockwise :size="28" @click="emits('reset')"></ph-arrow-counter-clockwise>
     </section>
   </main>
 </template>
@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { PhQuestion, PhGear, PhChartBar, PhArrowCounterClockwise } from "phosphor-vue"
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   (e: "openhelp"): void
   (e: "openstats"): void
   (e: "opensettings"): void

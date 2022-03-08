@@ -1,7 +1,12 @@
 <template>
   <section class="gamekeyboard">
     <div class="gamekeyboard__row" v-for="(keyset, index) in keyboardLayout" :key="index">
-      <game-keyboard-key v-for="value in keyset" :value="value" @click="handleKeypress" :key="value.key" />
+      <game-keyboard-key
+        v-for="value in keyset"
+        :value="value"
+        @click="handleKeypress"
+        :key="value.key"
+      ></game-keyboard-key>
     </div>
   </section>
 </template>

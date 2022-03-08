@@ -1,13 +1,13 @@
 <template>
   <game-header @reset="reset"></game-header>
-  <game-grid :board="board.value" :width="board.width" />
+  <game-grid :board="board.value" :width="board.width"></game-grid>
   <game-keyboard
     :keyboard="keyboard"
     :disabled="gameOver"
     @backspace="clearLastCellWithLetter()"
     @enter="handleEnter()"
     @keypress="(key) => updateCell(nextEmptyCell, { value: key })"
-  />
+  ></game-keyboard>
 </template>
 
 <script setup lang="ts">
@@ -15,20 +15,12 @@ import { ref, watch } from "vue"
 import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
 import GameHeader from "@/components/GameHeader.vue"
-import { ValidKey, type GameResult, GameStatus } from "@/utils/types"
+import { ValidKey, GameStatus } from "@/utils/types"
 import { useKeyboard } from "@/composables/use-keyboard"
 import { useBoard } from "@/composables/use-board"
 import { useWordle } from "@/composables/use-wordle"
 
-interface Props {
-  gameOver: boolean
-}
-
-defineProps<Props>()
-
-const emits = defineEmits<{
-  (e: "gameover", result: GameResult): void
-}>()
+const gameOver = ref<boolean>(false)
 
 const errors = ref<string[]>([])
 const { word, numGuesses, isValid, isCorrect, getScore, getEvaluations, reset: resetWordle } = useWordle()
@@ -71,7 +63,7 @@ function evaluateInputtedWord(input: string) {
     updateKeyState(input[letterIndex] as ValidKey, evaluation)
   })
   if (isCorrect(input)) {
-    emits("gameover", {
+    console.log("gameover", {
       status: GameStatus.WIN,
       word: word.value,
       guesses: currentRow.value + 1,
@@ -80,7 +72,7 @@ function evaluateInputtedWord(input: string) {
     return
   }
   if (currentRow.value === numGuesses.value - 1) {
-    emits("gameover", {
+    console.log("gameover", {
       status: GameStatus.LOSS,
       word: word.value,
       guesses: currentRow.value + 1,
@@ -90,6 +82,7 @@ function evaluateInputtedWord(input: string) {
 }
 
 function reset() {
+  gameOver.value = false
   resetKeyboard()
   resetBoard()
   resetWordle()
