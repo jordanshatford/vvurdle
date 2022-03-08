@@ -1,5 +1,5 @@
 <template>
-  <main class="vmodal" @click="emits('close')">
+  <main class="vmodal">
     <section class="vmodal__section">
       <ph-x :size="28" @click="emits('close')" class="vmodal__close"></ph-x>
       <slot></slot>
@@ -63,7 +63,7 @@ const handleKeyupEvent = (event: KeyboardEvent) => {
   }
   &__close {
     cursor: pointer;
-    color: gray;
+    color: $color-text;
     position: absolute;
     top: 1rem;
     right: 1rem;
