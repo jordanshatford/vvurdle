@@ -1,20 +1,31 @@
 import { EvaluationState } from "@/utils/types"
-import { computed } from "vue"
+import { computed, ref } from "vue"
 
-export function useWordle(length = 5) {
+function getWord(length: number) {
   const word = "VALVE"
-  const validWords = [word, "PIZZA", "VALUE"]
+  return word
+}
+
+function getValidWords(length: number) {
+  const validWords = ["VALVE", "PIZZA", "VALUE"]
+  return validWords
+}
+
+export function useWordle(len = 5) {
+  const length = ref(len)
+  const word = ref(getWord(length.value))
+  const validWords = ref(getValidWords(length.value))
 
   const numGuesses = computed(() => {
-    return word.length + 1
+    return word.value.length + 1
   })
 
   function isValid(w: string) {
-    return validWords.includes(w)
+    return validWords.value.includes(w)
   }
 
   function isCorrect(w: string) {
-    return w === word
+    return w === word.value
   }
 
   function getScore(guessesMade: number) {
@@ -23,7 +34,7 @@ export function useWordle(length = 5) {
 
   function getEvaluations(inputWord: string): EvaluationState[] {
     const inputArray = inputWord.split("")
-    const wordArray = word.split("")
+    const wordArray = word.value.split("")
     const evaluations: EvaluationState[] = []
     inputArray.forEach((letter, lIndex) => {
       let evaluation = EvaluationState.UNKNOWN
@@ -54,6 +65,11 @@ export function useWordle(length = 5) {
     return evaluations
   }
 
+  function reset() {
+    word.value = getWord(length.value)
+    validWords.value = getValidWords(length.value)
+  }
+
   return {
     word,
     numGuesses,
@@ -61,5 +77,6 @@ export function useWordle(length = 5) {
     isCorrect,
     getScore,
     getEvaluations,
+    reset,
   }
 }

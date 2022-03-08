@@ -61,6 +61,11 @@ export function useBoard(dimensions: { width: number; length: number }) {
     }
   }
 
+  function reset() {
+    board.value = initialize(board.width, board.length)
+    currentRow.value = 0
+  }
+
   return {
     board,
     currentRow,
@@ -70,5 +75,6 @@ export function useBoard(dimensions: { width: number; length: number }) {
     inputtedWord,
     clearLastCellWithLetter,
     updateCell,
+    reset,
   }
 }

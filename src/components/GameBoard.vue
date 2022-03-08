@@ -1,5 +1,5 @@
 <template>
-  <game-header></game-header>
+  <game-header @reset="reset"></game-header>
   <game-grid :board="board.value" :width="board.width" />
   <game-keyboard
     :keyboard="keyboard"
@@ -24,14 +24,14 @@ interface Props {
   gameOver: boolean
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const emits = defineEmits<{
   (e: "gameover", result: GameResult): void
 }>()
 
 const errors = ref<string[]>([])
-const { word, numGuesses, isValid, isCorrect, getScore, getEvaluations } = useWordle()
+const { word, numGuesses, isValid, isCorrect, getScore, getEvaluations, reset: resetWordle } = useWordle()
 const {
   board,
   currentRow,
@@ -41,11 +41,12 @@ const {
   inputtedWord,
   updateCell,
   clearLastCellWithLetter,
+  reset: resetBoard,
 } = useBoard({
-  width: word.length,
+  width: word.value.length,
   length: numGuesses.value,
 })
-const { keyboard, updateKeyState } = useKeyboard()
+const { keyboard, updateKeyState, reset: resetKeyboard } = useKeyboard()
 
 function handleEnter() {
   if (currentRowComplete.value) {
@@ -72,8 +73,8 @@ function evaluateInputtedWord(input: string) {
   if (isCorrect(input)) {
     emits("gameover", {
       status: GameStatus.WIN,
-      word: word,
-      guesses: currentRow.value,
+      word: word.value,
+      guesses: currentRow.value + 1,
       score: getScore(currentRow.value),
     })
     return
@@ -81,11 +82,17 @@ function evaluateInputtedWord(input: string) {
   if (currentRow.value === numGuesses.value - 1) {
     emits("gameover", {
       status: GameStatus.LOSS,
-      word: word,
-      guesses: currentRow.value,
+      word: word.value,
+      guesses: currentRow.value + 1,
       score: 0,
     })
   }
+}
+
+function reset() {
+  resetKeyboard()
+  resetBoard()
+  resetWordle()
 }
 
 watch(
@@ -94,8 +101,8 @@ watch(
     if (oldValue.length < newValue.length) {
       return
     }
-    const startIndex = currentRow.value * word.length
-    const endIndex = startIndex + word.length
+    const startIndex = currentRow.value * word.value.length
+    const endIndex = startIndex + word.value.length
     for (let i = startIndex; i < endIndex; i++) {
       updateCell(i, { wiggle: true })
     }
