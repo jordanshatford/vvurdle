@@ -69,7 +69,6 @@ function handleKeyupEvent(event: KeyboardEvent) {
 </script>
 
 <style scoped lang="scss">
-@import "./src/scss/variables";
 .gamekeyboard {
   margin-top: 1rem;
   &__row {
@@ -77,7 +76,7 @@ function handleKeyupEvent(event: KeyboardEvent) {
     justify-content: center;
     gap: 10px;
     margin-bottom: 10px;
-    @media only screen and (max-width: $breakpoint-mobile-max-w) {
+    @media only screen and (max-width: 600px) {
       gap: 5px;
       margin-bottom: 5px;
     }

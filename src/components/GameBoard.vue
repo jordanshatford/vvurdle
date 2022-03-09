@@ -48,10 +48,9 @@ const showSettingsModal = ref<boolean>(false)
 </script>
 
 <style scoped lang="scss">
-@import "./src/scss/variables";
 .gameboard {
   &__text {
-    color: $color-text;
+    color: var(--text-color);
   }
 }
 .fade-modal-enter-active,

@@ -30,12 +30,11 @@ const classObj = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@import "./src/scss/variables";
 .gamekeyboard__key {
   cursor: pointer;
   user-select: none;
-  color: $color-keyboard-key-text;
-  background-color: $color-keyboard-key-bg;
+  color: var(--text-color);
+  background-color: var(--bg-accent-color);
   width: 40px;
   height: 60px;
   border-radius: 5px;
@@ -44,25 +43,25 @@ const classObj = computed(() => {
   &:hover {
     opacity: 0.75;
   }
-  @media only screen and (max-width: $breakpoint-mobile-max-w) {
+  @media only screen and (max-width: 600px) {
     width: 30px;
     height: 45px;
   }
   &--wide {
     width: 80px;
-    @media only screen and (max-width: $breakpoint-mobile-max-w) {
+    @media only screen and (max-width: 600px) {
       width: 60px;
       font-size: 0.7rem;
     }
   }
   &--absent {
-    background-color: $color-letter-absent;
+    background-color: var(--absent-color);
   }
   &--present {
-    background-color: $color-letter-present;
+    background-color: var(--present-color);
   }
   &--correct {
-    background-color: $color-letter-correct;
+    background-color: var(--correct-color);
   }
 }
 </style>

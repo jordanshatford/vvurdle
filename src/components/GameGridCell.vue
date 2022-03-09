@@ -32,36 +32,35 @@ const flip = computed<boolean>(() => {
 </script>
 
 <style scoped lang="scss">
-@import "./src/scss/variables";
 .gameboard {
   &__cell {
     user-select: none;
     width: 60px;
     height: 60px;
-    border: 1px solid $color-gameboard-cell-border;
-    color: $color-keyboard-key-text;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
     font-size: 2rem;
     display: grid;
     place-items: center;
     &--absent {
-      background-color: $color-letter-absent;
+      background-color: var(--absent-color);
       border: none !important;
     }
     &--present {
-      background-color: $color-letter-present;
+      background-color: var(--present-color);
       border: none !important;
     }
     &--correct {
-      background-color: $color-letter-correct;
+      background-color: var(--correct-color);
       border: none !important;
     }
     &--multiple {
       background: linear-gradient(
         135deg,
-        $color-letter-correct,
-        $color-letter-correct 50%,
-        $color-letter-present 50%,
-        $color-letter-present 100%
+        var(--correct-color),
+        var(--correct-color) 50%,
+        var(--present-color) 50%,
+        var(--present-color) 100%
       );
       border: none !important;
     }

@@ -21,7 +21,6 @@ const emits = defineEmits<{
 </script>
 
 <style scoped lang="scss">
-@import "./src/scss/variables";
 .gameheader {
   width: 100%;
   display: flex;
@@ -32,7 +31,7 @@ const emits = defineEmits<{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $color-text;
+    color: var(--text-accent-color);
   }
   svg {
     cursor: pointer;

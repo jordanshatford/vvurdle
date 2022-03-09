@@ -3,8 +3,8 @@
     <p :class="['blurredword__text', { blurredword__blurrytext: blurred }]">
       <slot></slot>
     </p>
-    <ph-eye v-if="blurred" @click="handleUnblur()" :size="28"></ph-eye>
-    <ph-eye-slash v-else @click="blurred = true" :size="28"></ph-eye-slash>
+    <ph-eye v-if="blurred" @click="handleUnblur()" :size="28" class="blurredword__icon"></ph-eye>
+    <ph-eye-slash v-else @click="blurred = true" :size="28" class="blurredword__icon"></ph-eye-slash>
   </div>
 </template>
 
@@ -25,20 +25,22 @@ function handleUnblur() {
 </script>
 
 <style scoped lang="scss">
-@import "./src/scss/variables";
 .blurredword {
   padding-bottom: 1rem;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $color-text;
+  color: var(--text-color);
   &__text {
     margin: 0;
     font-size: 2rem;
   }
   &__blurrytext {
     filter: blur(10px);
+  }
+  &__icon {
+    color: var(--text-accent-color);
   }
   svg {
     padding-left: 0.5rem;

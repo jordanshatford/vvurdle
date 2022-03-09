@@ -34,7 +34,6 @@ const handleKeyupEvent = (event: KeyboardEvent) => {
 </script>
 
 <style lang="scss" scoped>
-@import "./src/scss/variables";
 .vmodal {
   z-index: 999;
   position: fixed;
@@ -45,17 +44,14 @@ const handleKeyupEvent = (event: KeyboardEvent) => {
   display: flex;
   justify-content: center;
   background-color: rgba($color: #141516, $alpha: 0.75);
-  @media only screen and (max-width: 400px) {
-    padding: 0.5rem;
-  }
   &__section {
     width: 500px;
     height: max-content;
-    background-color: $color-background;
+    background-color: var(--bg-color);
     margin-top: 5rem;
     padding: 2rem;
     border-radius: 0.5rem;
-    box-shadow: 5px 5px 5px rgba($color: #0f0f0f21, $alpha: 0.25);
+    box-shadow: var(--shadow-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,7 +59,7 @@ const handleKeyupEvent = (event: KeyboardEvent) => {
   }
   &__close {
     cursor: pointer;
-    color: $color-text;
+    color: var(--text-color);
     position: absolute;
     top: 1rem;
     right: 1rem;
