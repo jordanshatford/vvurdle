@@ -60,6 +60,9 @@ export function useGame(wordLength = ref(5)) {
   }
 
   function reset() {
+    if (!gameOver.value && currentRow.value === 0) {
+      return
+    }
     boardDimensions.value = { width: wordLength.value, length: wordLength.value + 1 }
     gameOver.value = false
     cheated.value = false
