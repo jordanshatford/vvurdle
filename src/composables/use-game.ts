@@ -5,6 +5,7 @@ import { GameStatus, type ValidKey } from "@/utils/types"
 import { useWordle } from "./use-wordle"
 
 export function useGame(wordLength = ref(5)) {
+  const savedLength = wordLength.value
   const { keyboard, updateKeyState, reset: resetKeyboard } = useKeyboard()
   const {
     word,
@@ -60,7 +61,7 @@ export function useGame(wordLength = ref(5)) {
   }
 
   function reset() {
-    if (!gameOver.value && currentRow.value === 0) {
+    if (!gameOver.value && currentRow.value === 0 && wordLength.value === savedLength) {
       return
     }
     boardDimensions.value = { width: wordLength.value, length: wordLength.value + 1 }

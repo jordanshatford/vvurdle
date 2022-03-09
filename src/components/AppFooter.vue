@@ -31,7 +31,7 @@ const githubLink = "https://github.com/jordanshatford/vvurdle"
     margin-left: auto;
   }
   &__text {
-    color: var(--text-accent-color)
+    color: var(--text-accent-color);
   }
 }
 </style>

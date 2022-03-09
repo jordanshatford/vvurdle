@@ -5,7 +5,9 @@
       <blurred-word @unblur="cheated = true">{{ word }}</blurred-word>
       <p class="gameboard__text">Word length:</p>
       <select name="wordlengths" v-model="wordLength">
-        <option v-for="(l, index) of availableLengths" :value="l" :key="index">{{ l }}</option>
+        <option v-for="(l, index) of availableLengths" :value="l" :key="index">
+          {{ l }}
+        </option>
       </select>
     </v-modal>
   </transition>
