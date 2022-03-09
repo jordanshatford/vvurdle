@@ -10,6 +10,9 @@
 
 VVurdle is [Wordle](https://www.nytimes.com/games/wordle/index.html) clone written in Vue.
 
+## Screenshot
+![readme-image](./src/assets/example.png)
+
 ## More Information
 More information can be found in the respective doc in the docs folder.
   - [DEVELOPMENT](./docs/DEVELOPMENT.md)
