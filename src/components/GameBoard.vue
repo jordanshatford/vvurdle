@@ -39,7 +39,7 @@ const showSettingsModal = ref<boolean>(false)
 }
 .fade-modal-enter-active,
 .fade-modal-leave-active {
-  transition: all 0.75s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .fade-modal-enter-from,
 .fade-modal-leave-to {
