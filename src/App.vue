@@ -1,11 +1,14 @@
 <template>
   <div class="app">
-    <header class="app__header">VVurdle</header>
+    <app-header></app-header>
     <game-board></game-board>
   </div>
+  <app-footer></app-footer>
 </template>
 
 <script setup lang="ts">
+import AppHeader from '@/components/AppHeader.vue';
+import AppFooter from "@/components/AppFooter.vue"
 import GameBoard from "@/components/GameBoard.vue"
 </script>
 
@@ -28,17 +31,5 @@ body {
   margin: 0;
   min-height: 100vh;
   height: 100%;
-}
-.app {
-  &__header {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    color: var(--text-color);
-    font-size: 3rem;
-    font-weight: bold;
-  }
 }
 </style>
