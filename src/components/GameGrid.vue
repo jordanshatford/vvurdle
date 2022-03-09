@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue"
 import GameBoardCell from "@/components/GameGridCell.vue"
 import type { CellInfo } from "@/utils/types"
 
@@ -23,9 +24,11 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const style = {
-  gridTemplateColumns: `repeat(${props.width}, 1fr)`,
-}
+const style = computed(() => {
+  return {
+    gridTemplateColumns: `repeat(${props.width}, 1fr)`,
+  }
+})
 </script>
 
 <style lang="scss" scoped>

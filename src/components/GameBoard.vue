@@ -3,6 +3,10 @@
     <v-modal v-if="showSettingsModal" @close="showSettingsModal = false">
       <p class="gameboard__text">Reveal the current word?</p>
       <blurred-word @unblur="cheated = true">{{ word }}</blurred-word>
+      <p class="gameboard__text">Word length:</p>
+      <select name="wordlengths" v-model="wordLength">
+        <option v-for="(l, index) of availableLengths" :value="l" :key="index">{{ l }}</option>
+      </select>
     </v-modal>
   </transition>
   <game-header @opensettings="showSettingsModal = true" @reset="reset"></game-header>
@@ -25,7 +29,20 @@ import BlurredWord from "@/components/BlurredWord.vue"
 import VModal from "@/components/VModal.vue"
 import { useGame } from "@/composables/use-game"
 
-const { word, gameOver, cheated, keyboard, board, handleBackspace, handleKeypress, handleSubmit, reset } = useGame()
+const wordLength = ref(5)
+
+const {
+  word,
+  gameOver,
+  cheated,
+  availableLengths,
+  keyboard,
+  board,
+  handleBackspace,
+  handleKeypress,
+  handleSubmit,
+  reset,
+} = useGame(wordLength)
 
 const showSettingsModal = ref<boolean>(false)
 </script>

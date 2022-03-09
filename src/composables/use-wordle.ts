@@ -44,8 +44,8 @@ function getValidWords(length: number) {
   return filteredWords
 }
 
-export function useWordle(len = 5) {
-  const length = ref(len)
+export function useWordle(length = ref(5)) {
+  const availableLengths = [3, 4, 5, 6, 7, 8]
   const validWords = ref(getValidWords(length.value))
   const word = ref(getWord(validWords.value))
 
@@ -104,8 +104,10 @@ export function useWordle(len = 5) {
   }
 
   return {
+    length,
     word,
     numGuesses,
+    availableLengths,
     isValid,
     isCorrect,
     getScore,

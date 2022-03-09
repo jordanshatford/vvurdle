@@ -4,9 +4,22 @@ import { useBoard } from "@/composables/use-board"
 import { GameStatus, type ValidKey } from "@/utils/types"
 import { useWordle } from "./use-wordle"
 
-export function useGame() {
-  const { word, numGuesses, isValid, isCorrect, getScore, getEvaluations, reset: resetWordle } = useWordle()
+export function useGame(wordLength = ref(5)) {
   const { keyboard, updateKeyState, reset: resetKeyboard } = useKeyboard()
+  const {
+    word,
+    numGuesses,
+    availableLengths,
+    isValid,
+    isCorrect,
+    getScore,
+    getEvaluations,
+    reset: resetWordle,
+  } = useWordle(wordLength)
+  const boardDimensions = ref({
+    width: wordLength.value,
+    length: numGuesses.value,
+  })
   const {
     board,
     currentRow,
@@ -17,10 +30,7 @@ export function useGame() {
     updateCell,
     clearLastCellWithLetter,
     reset: resetBoard,
-  } = useBoard({
-    width: word.value.length,
-    length: numGuesses.value,
-  })
+  } = useBoard(boardDimensions)
 
   const gameOver = ref<boolean>(false)
   const cheated = ref<boolean>(false)
@@ -50,11 +60,12 @@ export function useGame() {
   }
 
   function reset() {
+    boardDimensions.value = { width: wordLength.value, length: wordLength.value + 1 }
     gameOver.value = false
     cheated.value = false
+    resetWordle()
     resetKeyboard()
     resetBoard()
-    resetWordle()
   }
 
   function evaluateInputtedWord(input: string) {
@@ -107,6 +118,7 @@ export function useGame() {
 
   return {
     word,
+    availableLengths,
     gameOver,
     cheated,
     errors,

@@ -1,4 +1,4 @@
-import { ref, computed, reactive } from "vue"
+import { ref, computed, reactive, type Ref } from "vue"
 import { ValidKey, EvaluationState, type CellInfo } from "@/utils/types"
 
 export function initialize(width: number, length: number): CellInfo[] {
@@ -7,11 +7,11 @@ export function initialize(width: number, length: number): CellInfo[] {
   })
 }
 
-export function useBoard(dimensions: { width: number; length: number }) {
+export function useBoard(dimensions: Ref<{ width: number; length: number }>) {
   const board = reactive({
-    value: initialize(dimensions.width, dimensions.length),
-    width: dimensions.width,
-    length: dimensions.length,
+    value: initialize(dimensions.value.width, dimensions.value.length),
+    width: dimensions.value.width,
+    length: dimensions.value.length,
   })
 
   const currentRow = ref(0)
@@ -62,7 +62,9 @@ export function useBoard(dimensions: { width: number; length: number }) {
   }
 
   function reset() {
-    board.value = initialize(board.width, board.length)
+    board.value = initialize(dimensions.value.width, dimensions.value.length)
+    board.width = dimensions.value.width
+    board.length = dimensions.value.length
     currentRow.value = 0
   }
 
