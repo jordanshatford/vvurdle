@@ -26,11 +26,4 @@ import GameBoard from "@/components/GameBoard.vue"
   --correct-color: #538d4e;
   --incorrect-color: #ec5d5d;
 }
-body {
-  background-color: var(--bg-color);
-  padding: 0;
-  margin: 0;
-  min-height: 100vh;
-  height: 100%;
-}
 </style>

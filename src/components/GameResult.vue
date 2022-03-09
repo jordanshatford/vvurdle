@@ -56,7 +56,7 @@ interface Props {
 defineProps<Props>()
 
 const emits = defineEmits<{
-  (e: 'playagain'): void
+  (e: "playagain"): void
 }>()
 </script>
 
@@ -114,7 +114,7 @@ const emits = defineEmits<{
     button {
       color: var(--text-color);
       background-color: var(--bg-accent-color);
-      padding: .5rem 1rem .5rem 1rem;
+      padding: 0.5rem 1rem 0.5rem 1rem;
       cursor: pointer;
       user-select: none;
       border-radius: 5px;
