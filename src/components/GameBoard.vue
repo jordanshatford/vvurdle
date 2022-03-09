@@ -1,11 +1,16 @@
 <template>
   <transition name="fade-modal">
+    <v-modal v-if="gameOver" @close="gameOver = false">
+      <game-result :result="result"></game-result>
+    </v-modal>
+  </transition>
+  <transition name="fade-modal">
     <v-modal v-if="showHelpModal" @close="showHelpModal = false" title="How to Play:">
       <game-help></game-help>
     </v-modal>
   </transition>
   <transition name="fade-modal">
-    <v-modal v-if="showSettingsModal" @close="showSettingsModal = false" title="Settings">
+    <v-modal v-if="showSettingsModal" @close="showSettingsModal = false" title="Settings:">
       <p class="gameboard__text">Reveal the current word?</p>
       <blurred-word @unblur="cheated = true">{{ word }}</blurred-word>
       <p class="gameboard__text">Word length:</p>
@@ -16,7 +21,12 @@
       </select>
     </v-modal>
   </transition>
-  <game-header @openhelp="showHelpModal = true" @opensettings="showSettingsModal = true" @reset="reset"></game-header>
+  <game-header
+    @openhelp="showHelpModal = true"
+    @openstats="result ? (gameOver = true) : null"
+    @opensettings="showSettingsModal = true"
+    @reset="reset"
+  ></game-header>
   <game-grid :board="board.value" :width="board.width"></game-grid>
   <game-keyboard
     :keyboard="keyboard"
@@ -33,6 +43,7 @@ import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
 import GameHeader from "@/components/GameHeader.vue"
 import GameHelp from "@/components/GameHelp.vue"
+import GameResult from "@/components/GameResult.vue"
 import BlurredWord from "@/components/BlurredWord.vue"
 import VModal from "@/components/VModal.vue"
 import { useGame } from "@/composables/use-game"
@@ -42,6 +53,7 @@ const wordLength = ref(5)
 const {
   word,
   gameOver,
+  result,
   cheated,
   availableLengths,
   keyboard,

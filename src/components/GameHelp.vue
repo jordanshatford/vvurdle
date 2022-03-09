@@ -57,7 +57,6 @@
   flex-direction: column;
   justify-content: flex-start !important;
   align-items: center;
-  background-color: var(--bg-color);
   overflow: auto;
   padding: 1rem;
   padding-top: 0;

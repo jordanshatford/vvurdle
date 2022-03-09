@@ -1,10 +1,11 @@
 import { ref, watch } from "vue"
 import { useKeyboard } from "@/composables/use-keyboard"
 import { useBoard } from "@/composables/use-board"
-import { GameStatus, type ValidKey } from "@/utils/types"
+import { type GameResult, GameStatus, type ValidKey } from "@/utils/types"
 import { useWordle } from "./use-wordle"
 
 export function useGame(wordLength = ref(5)) {
+  const streak = ref(0)
   const savedLength = ref(wordLength.value)
   const { keyboard, updateKeyState, reset: resetKeyboard } = useKeyboard()
   const {
@@ -33,6 +34,7 @@ export function useGame(wordLength = ref(5)) {
     reset: resetBoard,
   } = useBoard(boardDimensions)
 
+  const result = ref<GameResult>()
   const gameOver = ref<boolean>(false)
   const cheated = ref<boolean>(false)
   const errors = ref<string[]>([])
@@ -68,6 +70,7 @@ export function useGame(wordLength = ref(5)) {
     savedLength.value = wordLength.value
     gameOver.value = false
     cheated.value = false
+    result.value = undefined
     resetWordle()
     resetKeyboard()
     resetBoard()
@@ -81,23 +84,29 @@ export function useGame(wordLength = ref(5)) {
       updateKeyState(input[letterIndex] as ValidKey, evaluation)
     })
     if (isCorrect(input)) {
-      console.log("gameover", {
+      streak.value++
+      result.value = {
         status: GameStatus.WIN,
         word: word.value,
+        streak: streak.value,
         guesses: currentRow.value + 1,
         score: getScore(currentRow.value),
         cheated: cheated.value,
-      })
+      }
+      gameOver.value = true
       return
     }
     if (currentRow.value === numGuesses.value - 1) {
-      console.log("gameover", {
+      streak.value = 0
+      result.value = {
         status: GameStatus.LOSS,
+        streak: 0,
         word: word.value,
         guesses: currentRow.value + 1,
         score: 0,
         cheated: cheated.value,
-      })
+      }
+      gameOver.value = true
     }
   }
 
@@ -125,6 +134,7 @@ export function useGame(wordLength = ref(5)) {
     word,
     availableLengths,
     gameOver,
+    result,
     cheated,
     errors,
     keyboard,

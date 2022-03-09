@@ -24,6 +24,7 @@ import GameBoard from "@/components/GameBoard.vue"
   --absent-color: #3a3a3c;
   --present-color: #b59f3b;
   --correct-color: #538d4e;
+  --incorrect-color: #ec5d5d;
 }
 body {
   background-color: var(--bg-color);

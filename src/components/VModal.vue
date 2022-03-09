@@ -13,7 +13,7 @@ import { onMounted, onBeforeUnmount } from "vue"
 import { PhX } from "phosphor-vue"
 
 interface Props {
-  title: string
+  title?: string
 }
 
 withDefaults(defineProps<Props>(), { title: "" })
@@ -49,7 +49,7 @@ const handleKeyupEvent = (event: KeyboardEvent) => {
   justify-content: center;
   background-color: rgba($color: #141516, $alpha: 0.75);
   &__section {
-    width: 500px;
+    width: 400px;
     height: max-content;
     max-height: calc(100% - 15rem);
     background-color: var(--bg-color);
