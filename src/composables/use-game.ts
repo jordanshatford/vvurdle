@@ -49,12 +49,10 @@ export function useGame(wordLength = ref(5)) {
         evaluateInputtedWord(inputtedWord.value)
         currentRow.value++
       } else {
-        errors.value.unshift("Not in word list")
-        console.log("NOT IN LIST")
+        errors.value.unshift("Not a valid word!")
       }
     } else {
-      errors.value.unshift("Not enough letters")
-      console.log("NOT ENOUGH")
+      errors.value.unshift("Not enough letters in word!")
     }
   }
 
@@ -128,7 +126,7 @@ export function useGame(wordLength = ref(5)) {
         for (let i = startIndex; i < endIndex; i++) {
           updateCell(i, { wiggle: false })
         }
-      }, 1500)
+      }, 2000)
     }
   )
 

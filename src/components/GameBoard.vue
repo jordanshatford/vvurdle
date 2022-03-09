@@ -21,6 +21,7 @@
       </select>
     </v-modal>
   </transition>
+  <game-errors :errors="errors"></game-errors>
   <game-header
     @openhelp="showHelpModal = true"
     @openstats="result ? (gameOver = true) : null"
@@ -44,6 +45,7 @@ import GameKeyboard from "@/components/GameKeyboard.vue"
 import GameHeader from "@/components/GameHeader.vue"
 import GameHelp from "@/components/GameHelp.vue"
 import GameResult from "@/components/GameResult.vue"
+import GameErrors from "@/components/GameErrors.vue"
 import BlurredWord from "@/components/BlurredWord.vue"
 import VModal from "@/components/VModal.vue"
 import { useGame } from "@/composables/use-game"
@@ -54,6 +56,7 @@ const {
   word,
   gameOver,
   result,
+  errors,
   cheated,
   availableLengths,
   keyboard,
