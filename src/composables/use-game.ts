@@ -84,7 +84,9 @@ export function useGame(wordLength = ref(5)) {
       updateKeyState(input[letterIndex] as ValidKey, evaluation)
     })
     if (isCorrect(input)) {
-      streak.value++
+      if (!cheated.value) {
+        streak.value++
+      }
       result.value = {
         status: GameStatus.WIN,
         word: word.value,

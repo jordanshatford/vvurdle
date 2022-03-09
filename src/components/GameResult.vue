@@ -34,6 +34,9 @@
           <span>Cheated: </span>
           <span>{{ result?.cheated }}</span>
         </article>
+        <article v-if="result?.cheated" class="gameresult__stats__cheater">
+          <span>You looked at the answer! This wont count towards your overall stats!</span>
+        </article>
       </section>
     </div>
   </main>
@@ -92,6 +95,11 @@ defineProps<Props>()
       span {
         font-size: 1rem;
       }
+    }
+    &__cheater {
+      color: var(--text-color);
+      font-size: 1.1rem;
+      padding-top: 1rem;
     }
   }
 }
