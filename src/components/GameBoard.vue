@@ -1,6 +1,11 @@
 <template>
   <transition name="fade-modal">
-    <v-modal v-if="showSettingsModal" @close="showSettingsModal = false">
+    <v-modal v-if="showHelpModal" @close="showHelpModal = false" title="How to Play:">
+      <game-help></game-help>
+    </v-modal>
+  </transition>
+  <transition name="fade-modal">
+    <v-modal v-if="showSettingsModal" @close="showSettingsModal = false" title="Settings">
       <p class="gameboard__text">Reveal the current word?</p>
       <blurred-word @unblur="cheated = true">{{ word }}</blurred-word>
       <p class="gameboard__text">Word length:</p>
@@ -11,7 +16,7 @@
       </select>
     </v-modal>
   </transition>
-  <game-header @opensettings="showSettingsModal = true" @reset="reset"></game-header>
+  <game-header @openhelp="showHelpModal = true" @opensettings="showSettingsModal = true" @reset="reset"></game-header>
   <game-grid :board="board.value" :width="board.width"></game-grid>
   <game-keyboard
     :keyboard="keyboard"
@@ -27,6 +32,7 @@ import { ref } from "vue"
 import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
 import GameHeader from "@/components/GameHeader.vue"
+import GameHelp from "@/components/GameHelp.vue"
 import BlurredWord from "@/components/BlurredWord.vue"
 import VModal from "@/components/VModal.vue"
 import { useGame } from "@/composables/use-game"
@@ -47,6 +53,7 @@ const {
 } = useGame(wordLength)
 
 const showSettingsModal = ref<boolean>(false)
+const showHelpModal = ref<boolean>(false)
 </script>
 
 <style scoped lang="scss">

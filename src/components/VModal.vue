@@ -1,6 +1,7 @@
 <template>
   <main class="vmodal">
     <section class="vmodal__section">
+      <p class="vmodal__heading">{{ title }}</p>
       <ph-x :size="28" @click="emits('close')" class="vmodal__close"></ph-x>
       <slot></slot>
     </section>
@@ -11,8 +12,13 @@
 import { onMounted, onBeforeUnmount } from "vue"
 import { PhX } from "phosphor-vue"
 
+interface Props {
+  title: string
+}
+
+withDefaults(defineProps<Props>(), { title: "" })
+
 const emits = defineEmits<{
-  (e: "accept"): void
   (e: "close"): void
 }>()
 
@@ -27,8 +33,6 @@ onBeforeUnmount(() => {
 const handleKeyupEvent = (event: KeyboardEvent) => {
   if (event.code === "Escape") {
     emits("close")
-  } else if (event.code === "Enter") {
-    return emits("accept")
   }
 }
 </script>
@@ -47,15 +51,25 @@ const handleKeyupEvent = (event: KeyboardEvent) => {
   &__section {
     width: 500px;
     height: max-content;
+    max-height: calc(100% - 15rem);
     background-color: var(--bg-color);
     margin-top: 5rem;
     padding: 2rem;
+    padding-top: 3rem;
     border-radius: 0.5rem;
     box-shadow: var(--shadow-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+  }
+  &__heading {
+    color: var(--text-color);
+    position: absolute;
+    font-size: 1.5rem;
+    top: 1rem;
+    left: 2rem;
+    margin: 0;
   }
   &__close {
     cursor: pointer;
