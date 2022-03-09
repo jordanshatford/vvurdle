@@ -38,6 +38,9 @@
           <span>You looked at the answer! This wont count towards your overall stats!</span>
         </article>
       </section>
+      <div class="gameresult__button">
+        <button @click="emits('playagain')">Play Again</button>
+      </div>
     </div>
   </main>
 </template>
@@ -51,6 +54,10 @@ interface Props {
 }
 
 defineProps<Props>()
+
+const emits = defineEmits<{
+  (e: 'playagain'): void
+}>()
 </script>
 
 <style scoped lang="scss">
@@ -61,8 +68,6 @@ defineProps<Props>()
   justify-content: flex-start !important;
   align-items: center;
   overflow: auto;
-  padding: 1rem;
-  padding-top: 0;
   @media only screen and (max-width: 400px) {
     padding: 0.5rem;
   }
@@ -100,6 +105,27 @@ defineProps<Props>()
       color: var(--text-color);
       font-size: 1.1rem;
       padding-top: 1rem;
+    }
+  }
+  &__button {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    button {
+      color: var(--text-color);
+      background-color: var(--bg-accent-color);
+      padding: .5rem 1rem .5rem 1rem;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 5px;
+      border-color: var(--bg-accent-color);
+      outline: none;
+      &:focus {
+        outline: 0 !important;
+      }
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 }

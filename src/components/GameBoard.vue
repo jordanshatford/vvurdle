@@ -1,7 +1,7 @@
 <template>
   <transition name="fade-modal">
     <v-modal v-if="gameOver" @close="gameOver = false">
-      <game-result :result="result"></game-result>
+      <game-result :result="result" @playagain="reset"></game-result>
     </v-modal>
   </transition>
   <transition name="fade-modal">
