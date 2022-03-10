@@ -28,7 +28,12 @@ const allWords = [
   ...american35,
   ...american40,
 ]
-const uniqueWords = [...new Set(allWords)].map((w) => w.toUpperCase())
+const uniqueWords = [...new Set(allWords)].map((word) =>
+  word
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toUpperCase()
+)
 
 function getWord(words: string[]) {
   const randomWord = words[Math.floor(Math.random() * words.length)]
