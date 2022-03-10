@@ -5,7 +5,6 @@
         v-for="(cell, index) in board.state"
         :value="cell.value"
         :state="cell.state"
-        :wiggle="cell.wiggle"
         :key="index"
       ></game-board-cell>
     </section>

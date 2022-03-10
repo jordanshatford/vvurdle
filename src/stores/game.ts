@@ -51,16 +51,8 @@ export const useGame = defineStore("game", {
           if (newVal.length < oldVal.length) {
             return
           }
-          const startIndex = this.board.currentRow * this.word.length
-          const endIndex = startIndex + this.word.length
-          for (let i = startIndex; i < endIndex; i++) {
-            this.board.updateCell(i, { wiggle: true })
-          }
           setTimeout(() => {
             this.errors.pop()
-            for (let i = startIndex; i < endIndex; i++) {
-              this.board.updateCell(i, { wiggle: false })
-            }
           }, 2000)
         }
       )

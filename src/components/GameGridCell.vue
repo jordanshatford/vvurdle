@@ -1,12 +1,7 @@
 <template>
   <div
     class="gameboard__cell"
-    :class="[
-      `gameboard__cell--${state}`,
-      { 'gameboard__cell--wiggle': wiggle },
-      { 'gameboard__cell--animate': value },
-      { 'gameboard__cell--flip': flip },
-    ]"
+    :class="[`gameboard__cell--${state}`, { 'gameboard__cell--animate': value }, { 'gameboard__cell--flip': flip }]"
   >
     {{ value }}
   </div>
@@ -19,7 +14,6 @@ import { EvaluationState, ValidKey } from "@/utils/types"
 interface Props {
   value: ValidKey
   state: EvaluationState
-  wiggle?: boolean
 }
 
 const props = defineProps<Props>()
@@ -68,10 +62,6 @@ const flip = computed<boolean>(() => {
       animation: scale 0.2s;
       animation-iteration-count: 1;
     }
-    &--wiggle {
-      animation: wiggle 0.3s;
-      animation-iteration-count: 3;
-    }
     &--flip {
       animation: flip 0.5s;
       animation-iteration-count: 1;
@@ -88,24 +78,6 @@ const flip = computed<boolean>(() => {
   }
   100% {
     transform: scale(1);
-  }
-}
-
-@keyframes wiggle {
-  0% {
-    transform: translateX(0px);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  50% {
-    transform: translateX(0px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
-  100% {
-    transform: translateX(0px);
   }
 }
 

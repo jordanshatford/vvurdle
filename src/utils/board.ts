@@ -3,12 +3,11 @@ import { ValidKey, EvaluationState } from "@/utils/types"
 interface CellInfo {
   value: ValidKey
   state: EvaluationState
-  wiggle?: boolean
 }
 
 function initialize(width: number, height: number): CellInfo[] {
   return [...Array(width * height)].map(() => {
-    return { value: ValidKey.BLANK, state: EvaluationState.UNKNOWN, wiggle: false }
+    return { value: ValidKey.BLANK, state: EvaluationState.UNKNOWN }
   })
 }
 
