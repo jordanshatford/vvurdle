@@ -1,7 +1,7 @@
 <template>
   <transition name="fade-modal">
     <v-modal v-if="showResultModal" @close="showResultModal = false">
-      <game-result :result="game.result" @playagain="game.reset"></game-result>
+      <game-result :result="game.result" @playagain="playAgain"></game-result>
     </v-modal>
   </transition>
   <transition name="fade-modal">
@@ -52,6 +52,11 @@ const game = useGame()
 const showResultModal = ref<boolean>(false)
 const showSettingsModal = ref<boolean>(false)
 const showHelpModal = ref<boolean>(false)
+
+function playAgain() {
+  showResultModal.value = false
+  game.reset()
+}
 
 watch(
   () => game.over,
