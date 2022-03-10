@@ -77,15 +77,13 @@ export function useWordle(length = ref(5)) {
         if (multiple.length > 1) {
           const [multipleLetter] = multiple
           const guess = inputArray.filter((v) => v === multipleLetter)
-          if (guess.length !== multiple.length) {
-            if (guess.length <= multiple.length) {
-              const [guessLetter] = guess
-              inputArray.forEach((letter) => {
-                if (letter === guessLetter) {
-                  evaluation = EvaluationState.MULTIPLE
-                }
-              })
-            }
+          if (guess.length < multiple.length) {
+            const [guessLetter] = guess
+            inputArray.forEach((letter) => {
+              if (letter === guessLetter) {
+                evaluation = EvaluationState.MULTIPLE
+              }
+            })
           }
         }
       } else if (wordArray.includes(letter)) {
