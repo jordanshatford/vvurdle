@@ -28,7 +28,7 @@ game.$subscribe(
 :root {
   --text-color: #ffffff;
   --text-accent-color: #818384;
-  --bg-color: #22272d;
+  --bg-color: #1c1e20;
   --bg-accent-color: #818384;
   --border-color: #444c56;
   --bg-transparent-color: rgba(#141516, 0.75);
