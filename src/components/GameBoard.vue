@@ -1,6 +1,6 @@
 <template>
   <transition name="fade-modal">
-    <v-modal v-if="game.over" @close="game.over = false">
+    <v-modal v-if="showResultModal" @close="showResultModal = false">
       <game-result :result="game.result" @playagain="game.reset"></game-result>
     </v-modal>
   </transition>
@@ -22,7 +22,7 @@
   <game-errors :errors="game.errors"></game-errors>
   <game-header
     @openhelp="showHelpModal = true"
-    @openstats="game.result.status ? (game.over = true) : null"
+    @openstats="game.over ? (showResultModal = true) : null"
     @opensettings="showSettingsModal = true"
     @reset="game.reset"
   ></game-header>
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, watch } from "vue"
 import GameGrid from "@/components/GameGrid.vue"
 import GameKeyboard from "@/components/GameKeyboard.vue"
 import GameHeader from "@/components/GameHeader.vue"
@@ -49,8 +49,18 @@ import VModal from "@/components/VModal.vue"
 import { useGame } from "@/stores/game"
 
 const game = useGame()
+const showResultModal = ref<boolean>(false)
 const showSettingsModal = ref<boolean>(false)
 const showHelpModal = ref<boolean>(false)
+
+watch(
+  () => game.over,
+  (newVal, oldVal) => {
+    if (newVal && !oldVal) {
+      showResultModal.value = true
+    }
+  }
+)
 </script>
 
 <style scoped lang="scss">
