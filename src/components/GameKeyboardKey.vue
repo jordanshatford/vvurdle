@@ -1,17 +1,18 @@
 <template>
-  <div class="gamekeyboard__key" :class="classObj" @click="emits('click', value.key)">
-    <ph-backspace v-if="value.key === ValidKey.BACKSPACE" :size="24" weight="fill"></ph-backspace>
-    <span v-else>{{ value.key }}</span>
+  <div class="gamekeyboard__key" :class="classObj" @click="emits('click', kkey)">
+    <ph-backspace v-if="kkey === ValidKey.BACKSPACE" :size="24" weight="fill"></ph-backspace>
+    <span v-else>{{ kkey }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue"
 import { PhBackspace } from "phosphor-vue"
-import { type KeyInfo, ValidKey } from "@/utils/types"
+import { type EvaluationState, ValidKey } from "@/utils/types"
 
 interface Props {
-  value: KeyInfo
+  kkey: ValidKey
+  state: EvaluationState
 }
 
 const props = defineProps<Props>()
@@ -21,10 +22,10 @@ const emits = defineEmits<{
 }>()
 
 const classObj = computed(() => {
-  if ([ValidKey.ENTER, ValidKey.BACKSPACE].includes(props.value.key)) {
+  if ([ValidKey.ENTER, ValidKey.BACKSPACE].includes(props.kkey)) {
     return "gamekeyboard__key--wide"
   } else {
-    return `gamekeyboard__key--${props.value.state}`
+    return `gamekeyboard__key--${props.state}`
   }
 })
 </script>

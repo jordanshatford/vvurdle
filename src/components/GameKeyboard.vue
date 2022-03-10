@@ -3,8 +3,9 @@
     <div class="gamekeyboard__row" v-for="(keyset, index) in keyboardLayout" :key="index">
       <game-keyboard-key
         v-for="value in keyset"
-        :value="value"
         @click="handleKeypress"
+        :kkey="value.key"
+        :state="value.state"
         :key="value.key"
       ></game-keyboard-key>
     </div>
@@ -14,10 +15,11 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted } from "vue"
 import GameKeyboardKey from "@/components/GameKeyboardKey.vue"
-import { type KeyInfo, ValidKey } from "@/utils/types"
+import { ValidKey } from "@/utils/types"
+import type { Keyboard } from "@/utils/keyboard"
 
 interface Props {
-  keyboard: KeyInfo[]
+  keyboard: Partial<Keyboard>
   disabled?: boolean
 }
 
@@ -38,7 +40,10 @@ onUnmounted(() => {
 })
 
 const keyboardLayout = computed(() => {
-  return [props.keyboard.slice(0, 10), props.keyboard.slice(10, 19), props.keyboard.slice(19, 29)]
+  if (props.keyboard.state) {
+    return [props.keyboard.state.slice(0, 10), props.keyboard.state.slice(10, 19), props.keyboard.state.slice(19, 29)]
+  }
+  return []
 })
 
 function handleKeypress(key: ValidKey) {

@@ -10,6 +10,7 @@ specifiers:
   eslint: ^8.5.0
   eslint-plugin-vue: ^8.2.0
   phosphor-vue: ^4.4.0
+  pinia: ^2.0.11
   prettier: ^2.5.1
   sass: ^1.49.9
   typescript: ~4.5.5
@@ -20,6 +21,7 @@ specifiers:
 
 dependencies:
   phosphor-vue: 4.4.0_vue@3.2.31
+  pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
   vue: 3.2.31
   wordlist-js: 1.2.1
 
@@ -372,6 +374,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.2.31
       '@vue/shared': 3.2.31
+    dev: false
+
+  /@vue/devtools-api/6.0.13:
+    resolution: {integrity: sha512-T34EjcArVqzANedEZe2kXQ+AZsld2z1ptJlkOGm87+blk+s6udnP4ze/NYqV8lz1o9AIivimN0xxteLlWiWQdg==}
     dev: false
 
   /@vue/eslint-config-prettier/7.0.0_eslint@8.10.0+prettier@2.5.1:
@@ -1492,6 +1498,24 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
+  /pinia/2.0.11_typescript@4.5.5+vue@3.2.31:
+    resolution: {integrity: sha512-JzcmnMqu28PNWOjDgEDK6fTrIzX8eQZKPPKvu/fpHdpXARUj1xeVdFi3YFIMOWswqaBd589cpmAMdSSTryI9iw==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.0.13
+      typescript: 4.5.5
+      vue: 3.2.31
+      vue-demi: 0.12.1_vue@3.2.31
+    dev: false
+
   /postcss/8.4.7:
     resolution: {integrity: sha512-L9Ye3r6hkkCeOETQX6iOaWZgjp3LL6Lpqm6EtgbKrgqGGteRMNb9vzBfRL96YOSu8o7x3MfIH9Mo5cPJFGrW6A==}
     engines: {node: ^10 || ^12 || >=14}
@@ -1953,6 +1977,21 @@ packages:
       vscode-pug-languageservice: 0.31.4
       vscode-typescript-languageservice: 0.31.4
     dev: true
+
+  /vue-demi/0.12.1_vue@3.2.31:
+    resolution: {integrity: sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.31
+    dev: false
 
   /vue-eslint-parser/8.3.0_eslint@8.10.0:
     resolution: {integrity: sha512-dzHGG3+sYwSf6zFBa0Gi9ZDshD7+ad14DGOdTLjruRVgZXe2J+DcZ9iUhyR48z5g1PqRa20yt3Njna/veLJL/g==}

@@ -1,5 +1,4 @@
 import { EvaluationState } from "@/utils/types"
-import { computed, ref } from "vue"
 import {
   english10,
   english20,
@@ -33,9 +32,6 @@ const uniqueWords = [...new Set(allWords)].map((w) => w.toUpperCase())
 
 function getWord(words: string[]) {
   const randomWord = words[Math.floor(Math.random() * words.length)]
-  if (import.meta.env.DEV) {
-    console.info("The word to guess is:", randomWord)
-  }
   return randomWord
 }
 
@@ -44,30 +40,34 @@ function getValidWords(length: number) {
   return filteredWords
 }
 
-export function useWordle(length = ref(5)) {
-  const availableLengths = [3, 4, 5, 6, 7, 8]
-  const validWords = ref(getValidWords(length.value))
-  const word = ref(getWord(validWords.value))
+export class Wordle {
+  private _validWords: string[]
+  private _word: string
 
-  const numGuesses = computed(() => {
-    return word.value.length + 1
-  })
-
-  function isValid(w: string) {
-    return validWords.value.includes(w)
+  constructor(length: number) {
+    this._validWords = getValidWords(length)
+    this._word = getWord(this._validWords)
   }
 
-  function isCorrect(w: string) {
-    return w === word.value
+  public get word() {
+    return this._word
   }
 
-  function getScore(guessesMade: number) {
-    return 100 - (100 / (numGuesses.value - 1)) * guessesMade
+  public isValid(s: string) {
+    return this._validWords.includes(s)
   }
 
-  function getEvaluations(inputWord: string): EvaluationState[] {
+  public isCorrect(s: string) {
+    return this._word === s
+  }
+
+  public getScore(allowedGuesses: number, guessesMade: number) {
+    return 100 - (100 / (allowedGuesses - 1)) * guessesMade
+  }
+
+  public getEvaluations(inputWord: string): EvaluationState[] {
     const inputArray = inputWord.split("")
-    const wordArray = word.value.split("")
+    const wordArray = this._word.split("")
     const evaluations: EvaluationState[] = []
     inputArray.forEach((letter, lIndex) => {
       let evaluation = EvaluationState.UNKNOWN
@@ -95,21 +95,6 @@ export function useWordle(length = ref(5)) {
     })
     return evaluations
   }
-
-  function reset() {
-    validWords.value = getValidWords(length.value)
-    word.value = getWord(validWords.value)
-  }
-
-  return {
-    length,
-    word,
-    numGuesses,
-    availableLengths,
-    isValid,
-    isCorrect,
-    getScore,
-    getEvaluations,
-    reset,
-  }
 }
+
+export default Wordle

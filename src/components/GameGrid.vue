@@ -2,7 +2,7 @@
   <main class="gameboard">
     <section class="gameboard__content" :style="style">
       <game-board-cell
-        v-for="(cell, index) in board"
+        v-for="(cell, index) in board.state"
         :value="cell.value"
         :state="cell.state"
         :wiggle="cell.wiggle"
@@ -15,18 +15,17 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import GameBoardCell from "@/components/GameGridCell.vue"
-import type { CellInfo } from "@/utils/types"
+import type { Board } from "@/utils/board"
 
 interface Props {
-  board: CellInfo[]
-  width: number
+  board: Partial<Board>
 }
 
 const props = defineProps<Props>()
 
 const style = computed(() => {
   return {
-    gridTemplateColumns: `repeat(${props.width}, 1fr)`,
+    gridTemplateColumns: `repeat(${props.board.width}, 1fr)`,
   }
 })
 </script>

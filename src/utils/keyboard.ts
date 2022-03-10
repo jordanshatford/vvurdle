@@ -1,7 +1,11 @@
-import { ref } from "vue"
-import { EvaluationState, ValidKey, type KeyInfo } from "@/utils/types"
+import { EvaluationState, ValidKey } from "./types"
 
-export function initialize(): KeyInfo[] {
+interface KeyInfo {
+  key: ValidKey
+  state: EvaluationState
+}
+
+function initialize(): KeyInfo[] {
   const keys = [
     ValidKey.Q,
     ValidKey.W,
@@ -37,28 +41,27 @@ export function initialize(): KeyInfo[] {
   })
 }
 
-export function useKeyboard() {
-  const keyboard = ref(initialize())
+export class Keyboard {
+  private _state: KeyInfo[]
 
-  function updateKeyState(key: ValidKey, state: EvaluationState) {
-    const k = keyboard.value.find((value) => value.key === key)
+  constructor() {
+    this._state = initialize()
+  }
+
+  public get state() {
+    return this._state
+  }
+
+  public updateKeyState(key: ValidKey, state: EvaluationState) {
+    const k = this._state.find((value) => value.key === key)
     if (!k) {
       return
     }
     if ((state as EvaluationState) === EvaluationState.MULTIPLE) {
-      k.state = EvaluationState.CORRECT
-    } else {
-      k.state = state
+      state = EvaluationState.CORRECT
     }
-  }
-
-  function reset() {
-    keyboard.value = initialize()
-  }
-
-  return {
-    keyboard,
-    updateKeyState,
-    reset,
+    k.state = state
   }
 }
+
+export default Keyboard

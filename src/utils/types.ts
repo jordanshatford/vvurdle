@@ -38,17 +38,6 @@ export enum EvaluationState {
   MULTIPLE = "multiple",
 }
 
-export interface KeyInfo {
-  key: ValidKey
-  state: EvaluationState
-}
-
-export interface CellInfo {
-  value: ValidKey
-  state: EvaluationState
-  wiggle?: boolean
-}
-
 export enum GameStatus {
   WIN = "win",
   LOSS = "loss",

@@ -10,6 +10,18 @@
 import AppHeader from "@/components/AppHeader.vue"
 import AppFooter from "@/components/AppFooter.vue"
 import GameBoard from "@/components/GameBoard.vue"
+import { useGame, LOCAL_STORAGE_KEY } from "@/stores/game"
+
+const game = useGame()
+game.initialize()
+game.$subscribe(
+  (m, state) => {
+    const copy = Object.assign({}, state)
+    copy.errors = []
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(copy))
+  },
+  { detached: true }
+)
 </script>
 
 <style lang="scss">

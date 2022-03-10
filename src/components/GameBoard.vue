@@ -1,7 +1,7 @@
 <template>
   <transition name="fade-modal">
-    <v-modal v-if="gameOver" @close="gameOver = false">
-      <game-result :result="result" @playagain="reset"></game-result>
+    <v-modal v-if="game.over" @close="game.over = false">
+      <game-result :result="game.result" @playagain="game.reset"></game-result>
     </v-modal>
   </transition>
   <transition name="fade-modal">
@@ -12,27 +12,27 @@
   <transition name="fade-modal">
     <v-modal v-if="showSettingsModal" @close="showSettingsModal = false" title="Settings:">
       <game-settings
-        :word="word"
-        v-model:length="wordLength"
-        :availableLengths="availableLengths"
-        @checkedword="cheated = true"
+        :word="game.word"
+        v-model:length="game.length"
+        :availableLengths="game.availableLengths"
+        @checkedword="game.cheated = true"
       ></game-settings>
     </v-modal>
   </transition>
-  <game-errors :errors="errors"></game-errors>
+  <game-errors :errors="game.errors"></game-errors>
   <game-header
     @openhelp="showHelpModal = true"
-    @openstats="result ? (gameOver = true) : null"
+    @openstats="game.result.status ? (game.over = true) : null"
     @opensettings="showSettingsModal = true"
-    @reset="reset"
+    @reset="game.reset"
   ></game-header>
-  <game-grid :board="board.value" :width="board.width"></game-grid>
+  <game-grid :board="game.board"></game-grid>
   <game-keyboard
-    :keyboard="keyboard"
-    :disabled="gameOver"
-    @backspace="handleBackspace"
-    @enter="handleSubmit"
-    @keypress="handleKeypress"
+    :keyboard="game.keyboard"
+    :disabled="game.over"
+    @backspace="game.handleBackspace"
+    @enter="game.handleSubmit"
+    @keypress="game.handleKeypress"
   ></game-keyboard>
 </template>
 
@@ -46,25 +46,9 @@ import GameResult from "@/components/GameResult.vue"
 import GameSettings from "@/components/GameSettings.vue"
 import GameErrors from "@/components/GameErrors.vue"
 import VModal from "@/components/VModal.vue"
-import { useGame } from "@/composables/use-game"
+import { useGame } from "@/stores/game"
 
-const wordLength = ref(5)
-
-const {
-  word,
-  gameOver,
-  result,
-  errors,
-  cheated,
-  availableLengths,
-  keyboard,
-  board,
-  handleBackspace,
-  handleKeypress,
-  handleSubmit,
-  reset,
-} = useGame(wordLength)
-
+const game = useGame()
 const showSettingsModal = ref<boolean>(false)
 const showHelpModal = ref<boolean>(false)
 </script>
