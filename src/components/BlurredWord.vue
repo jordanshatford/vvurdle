@@ -26,7 +26,6 @@ function handleUnblur() {
 
 <style scoped lang="scss">
 .blurredword {
-  padding-bottom: 1rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -34,7 +33,7 @@ function handleUnblur() {
   color: var(--text-color);
   &__text {
     margin: 0;
-    font-size: 2rem;
+    font-size: 1rem;
   }
   &__blurrytext {
     filter: blur(10px);

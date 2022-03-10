@@ -11,14 +11,12 @@
   </transition>
   <transition name="fade-modal">
     <v-modal v-if="showSettingsModal" @close="showSettingsModal = false" title="Settings:">
-      <p class="gameboard__text">Reveal the current word?</p>
-      <blurred-word @unblur="cheated = true">{{ word }}</blurred-word>
-      <p class="gameboard__text">Word length:</p>
-      <select name="wordlengths" v-model="wordLength">
-        <option v-for="(l, index) of availableLengths" :value="l" :key="index">
-          {{ l }}
-        </option>
-      </select>
+      <game-settings
+        :word="word"
+        v-model:length="wordLength"
+        :availableLengths="availableLengths"
+        @checkedword="cheated = true"
+      ></game-settings>
     </v-modal>
   </transition>
   <game-errors :errors="errors"></game-errors>
@@ -45,8 +43,8 @@ import GameKeyboard from "@/components/GameKeyboard.vue"
 import GameHeader from "@/components/GameHeader.vue"
 import GameHelp from "@/components/GameHelp.vue"
 import GameResult from "@/components/GameResult.vue"
+import GameSettings from "@/components/GameSettings.vue"
 import GameErrors from "@/components/GameErrors.vue"
-import BlurredWord from "@/components/BlurredWord.vue"
 import VModal from "@/components/VModal.vue"
 import { useGame } from "@/composables/use-game"
 
@@ -72,11 +70,6 @@ const showHelpModal = ref<boolean>(false)
 </script>
 
 <style scoped lang="scss">
-.gameboard {
-  &__text {
-    color: var(--text-color);
-  }
-}
 .fade-modal-enter-active,
 .fade-modal-leave-active {
   transition: all 0.3s ease-in-out;
