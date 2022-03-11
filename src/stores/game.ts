@@ -123,6 +123,8 @@ export const useGame = defineStore("game", {
         if (import.meta.env.DEV) {
           console.info("The word to guess is:", this.word)
         }
+      } else {
+        this.errors.unshift("You must play the current game!")
       }
     },
   },

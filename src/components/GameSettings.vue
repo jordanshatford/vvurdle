@@ -18,6 +18,9 @@
             </select>
           </span>
         </article>
+        <span class="gamesettings__settings__accent">
+          Changing the length will allow you restarting mid game. Stats will not be counted.
+        </span>
       </section>
     </div>
   </main>
@@ -67,6 +70,11 @@ function emitUpdateLength(target: EventTarget | null) {
       span {
         font-size: 1rem;
       }
+    }
+    &__accent {
+      padding-top: 1rem;
+      display: block;
+      color: var(--text-accent-color);
     }
   }
 }
