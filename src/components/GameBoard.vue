@@ -22,7 +22,7 @@
   <game-errors :errors="game.errors"></game-errors>
   <game-header
     @openhelp="showHelpModal = true"
-    @openstats="game.over ? (showResultModal = true) : null"
+    @openstats="showResultModal = true"
     @opensettings="showSettingsModal = true"
     @reset="game.reset"
   ></game-header>

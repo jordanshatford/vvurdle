@@ -9,11 +9,19 @@
             weight="fill"
             class="gameresult__icon--correct"
           ></ph-check-circle>
-          <ph-x-circle v-else :size="50" weight="fill" class="gameresult__icon--wrong"></ph-x-circle>
+          <ph-x-circle
+            v-else-if="result?.status === GameStatus.LOSS"
+            :size="50"
+            weight="fill"
+            class="gameresult__icon--wrong"
+          ></ph-x-circle>
+          <ph-minus-circle v-else :size="50" weight="fill" class="gameresult__icon--neutral"></ph-minus-circle>
         </div>
-        <p class="gameresult__heading">{{ result?.status === GameStatus.WIN ? "You Win!" : "You Lost!" }}</p>
+        <p v-if="result?.status === GameStatus.WIN" class="gameresult__heading">You Win!</p>
+        <p v-else-if="result?.status === GameStatus.LOSS" class="gameresult__heading">You Lose!</p>
+        <p v-else class="gameresult__heading">Game In Progress!</p>
       </div>
-      <section class="gameresult__stats">
+      <section v-if="[GameStatus.WIN, GameStatus.LOSS].includes(result.status)" class="gameresult__stats">
         <p class="gameresult__stats__text">Game Stats:</p>
         <article class="gameresult__stats__stat">
           <span>Word:</span>
@@ -58,12 +66,12 @@
 </template>
 
 <script setup lang="ts">
-import { PhCheckCircle, PhXCircle } from "phosphor-vue"
+import { PhCheckCircle, PhXCircle, PhMinusCircle } from "phosphor-vue"
 import { type GameResult, GameStatus } from "@/utils/types"
 import { useStats } from "@/stores/stats"
 
 interface Props {
-  result?: GameResult
+  result: GameResult
 }
 
 defineProps<Props>()
@@ -94,6 +102,9 @@ const stats = useStats()
     }
     &--wrong {
       color: var(--incorrect-color);
+    }
+    &--neutral {
+      color: var(--text-accent-color);
     }
   }
   &__heading {
