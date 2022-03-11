@@ -46,7 +46,6 @@ export enum GameStatus {
 export interface GameResult {
   status: GameStatus
   word: string
-  streak: number
   guesses: number
   score: number
   cheated: boolean

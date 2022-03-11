@@ -11,6 +11,7 @@ import AppHeader from "@/components/AppHeader.vue"
 import AppFooter from "@/components/AppFooter.vue"
 import GameBoard from "@/components/GameBoard.vue"
 import { useGame, LOCAL_STORAGE_KEY } from "@/stores/game"
+import { useStats, LOCAL_STORAGE_KEY as STATS_LOCAL_STORAGE_KEY } from "@/stores/stats"
 
 const game = useGame()
 game.initialize()
@@ -19,6 +20,14 @@ game.$subscribe(
     const copy = Object.assign({}, state)
     copy.errors = []
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(copy))
+  },
+  { detached: true }
+)
+const stats = useStats()
+stats.initialize()
+stats.$subscribe(
+  (m, state) => {
+    localStorage.setItem(STATS_LOCAL_STORAGE_KEY, JSON.stringify(state))
   },
   { detached: true }
 )

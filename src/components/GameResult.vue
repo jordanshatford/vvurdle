@@ -14,8 +14,9 @@
         <p class="gameresult__heading">{{ result?.status === GameStatus.WIN ? "You Win!" : "You Lost!" }}</p>
       </div>
       <section class="gameresult__stats">
+        <p class="gameresult__stats__text">Game Stats:</p>
         <article class="gameresult__stats__stat">
-          <span>Word: </span>
+          <span>Word:</span>
           <span>{{ result?.word }}</span>
         </article>
         <article class="gameresult__stats__stat">
@@ -23,19 +24,30 @@
           <span>{{ result?.guesses }}</span>
         </article>
         <article class="gameresult__stats__stat">
-          <span>Score: </span>
+          <span>Score:</span>
           <span>{{ result?.score }}</span>
         </article>
-        <article class="gameresult__stats__stat">
-          <span>Streak: </span>
-          <span>{{ result?.streak }}</span>
-        </article>
-        <article class="gameresult__stats__stat">
-          <span>Cheated: </span>
-          <span>{{ result?.cheated }}</span>
-        </article>
         <article v-if="result?.cheated" class="gameresult__stats__cheater">
-          <span>You looked at the answer! This wont count towards your overall stats!</span>
+          <span>You cheated by looking at the word. This wont count towards your overall stats!</span>
+        </article>
+      </section>
+      <section v-if="!result?.cheated" class="gameresult__stats">
+        <p class="gameresult__stats__text">Overall Stats:</p>
+        <article class="gameresult__stats__stat">
+          <span>Current Streak:</span>
+          <span>{{ stats.currentStreak }}</span>
+        </article>
+        <article class="gameresult__stats__stat">
+          <span>Longest Streak:</span>
+          <span>{{ stats.longestStreak }}</span>
+        </article>
+        <article class="gameresult__stats__stat">
+          <span>Total Wins:</span>
+          <span>{{ stats.totalGamesWon }} ({{ stats.totalGamesPlayed }} played)</span>
+        </article>
+        <article class="gameresult__stats__stat">
+          <span>Total Score:</span>
+          <span>{{ stats.totalScore }}</span>
         </article>
       </section>
       <div class="gameresult__button">
@@ -48,6 +60,7 @@
 <script setup lang="ts">
 import { PhCheckCircle, PhXCircle } from "phosphor-vue"
 import { type GameResult, GameStatus } from "@/utils/types"
+import { useStats } from "@/stores/stats"
 
 interface Props {
   result?: GameResult
@@ -58,6 +71,8 @@ defineProps<Props>()
 const emits = defineEmits<{
   (e: "playagain"): void
 }>()
+
+const stats = useStats()
 </script>
 
 <style scoped lang="scss">
@@ -92,8 +107,11 @@ const emits = defineEmits<{
     color: var(--text-accent-color);
   }
   &__stats {
-    padding-left: 2rem;
-    padding-right: 2em;
+    padding: 0 2rem 2rem 2rem;
+    &__text {
+      margin: 0 0 0.5rem 0;
+      color: var(--text-color);
+    }
     &__stat {
       display: flex;
       justify-content: space-between;

@@ -66,8 +66,8 @@ export class Wordle {
     return this._word === s
   }
 
-  public getScore(allowedGuesses: number, guessesMade: number) {
-    return 100 - (100 / (allowedGuesses - 1)) * guessesMade
+  public getScore(wordLength: number, guessesMade: number) {
+    return 100 - (100 / wordLength) * (guessesMade - 1)
   }
 
   public getEvaluations(inputWord: string): EvaluationState[] {

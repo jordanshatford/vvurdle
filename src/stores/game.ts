@@ -4,6 +4,7 @@ import Board from "@/utils/board"
 import Wordle from "@/utils/wordle"
 import { GameStatus, type GameResult, type ValidKey } from "@/utils/types"
 import { watch } from "vue"
+import { useStats } from "./stats"
 
 export const LOCAL_STORAGE_KEY = "gamestate"
 const DEFAULT_WORD_LENGTH = 5
@@ -16,7 +17,6 @@ export const useGame = defineStore("game", {
     board: new Board(DEFAULT_WORD_LENGTH, DEFAULT_WORD_LENGTH + 1),
     keyboard: new Keyboard(),
     cheated: false,
-    streak: 0,
     over: false,
     errors: [] as string[],
     result: {} as GameResult,
@@ -83,46 +83,46 @@ export const useGame = defineStore("game", {
         this.keyboard.updateKeyState(input[letterIndex] as ValidKey, evaluation)
       })
       if (this.isCorrect(input)) {
-        if (!this.cheated) {
-          this.streak++
-        }
-        this.result = {
+        const result = {
           status: GameStatus.WIN,
           word: this.word,
-          streak: this.streak,
           guesses: this.guesses,
-          score: this.wordle.getScore(this.word.length + 1, this.guesses - 1),
+          score: this.wordle.getScore(this.word.length, this.guesses),
           cheated: this.cheated,
         }
+        const stats = useStats()
+        stats.addStats(result)
+        this.result = result
         this.over = true
         return
       }
       if (this.board.currentRow === this.word.length) {
-        this.streak = 0
-        this.result = {
+        const result = {
           status: GameStatus.LOSS,
-          streak: 0,
           word: this.word,
           guesses: this.guesses,
           score: 0,
           cheated: this.cheated,
         }
+        const stats = useStats()
+        stats.addStats(result)
+        this.result = result
         this.over = true
       }
     },
     reset() {
-      if (!this.over && this.board.currentRow === 0 && this.length === this.word.length) {
-        return
-      }
-      this.wordle = new Wordle(this.length)
-      this.board = new Board(this.length, this.length + 1)
-      this.keyboard = new Keyboard()
-      this.over = false
-      this.cheated = false
-      this.result = {} as GameResult
-      this.errors = []
-      if (import.meta.env.DEV) {
-        console.info("The word to guess is:", this.word)
+      const wordLengthChange = this.length !== this.word.length
+      if (this.over || wordLengthChange) {
+        this.wordle = new Wordle(this.length)
+        this.board = new Board(this.length, this.length + 1)
+        this.keyboard = new Keyboard()
+        this.over = false
+        this.cheated = false
+        this.result = {} as GameResult
+        this.errors = []
+        if (import.meta.env.DEV) {
+          console.info("The word to guess is:", this.word)
+        }
       }
     },
   },
