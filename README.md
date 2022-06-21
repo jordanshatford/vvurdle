@@ -1,6 +1,6 @@
 # VVurdle
 
-[![Powered By Vue](https://img.shields.io/badge/powered%20by-Vue-%23#4FC08D.svg?style=flat&logo=Vue.js)](https://kit.svelte.dev/)
+[![Powered By Vue](https://img.shields.io/badge/powered%20by-Vue-%234FC08D.svg?style=flat&logo=Vue.js)](https://vuejs.org/)
 [![Language: TypeScript](https://img.shields.io/badge/language-typescript-%233178C6.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 [![Sass](https://img.shields.io/badge/style-sass-%23CC6699?logo=sass)](https://sass-lang.com/)
 [![Prettier](https://img.shields.io/badge/code--formatter-prettier-%23F7B93E?style=flat&logo=prettier)](https://prettier.io/)
