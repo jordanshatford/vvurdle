@@ -2,7 +2,7 @@
   <main class="vmodal">
     <section class="vmodal__section">
       <p class="vmodal__heading">{{ title }}</p>
-      <ph-x :size="28" @click="emits('close')" class="vmodal__close"></ph-x>
+      <x-icon @click="emits('close')" class="vmodal__close"></x-icon>
       <slot></slot>
     </section>
   </main>
@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from "vue"
-import { PhX } from "phosphor-vue"
+import { XIcon } from "@heroicons/vue/outline"
 
 interface Props {
   title?: string
@@ -77,6 +77,7 @@ const handleKeyupEvent = (event: KeyboardEvent) => {
     position: absolute;
     top: 1rem;
     right: 1rem;
+    width: 28px;
     &:hover {
       opacity: 0.5;
     }

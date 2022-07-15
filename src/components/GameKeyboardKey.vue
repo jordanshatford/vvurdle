@@ -1,13 +1,13 @@
 <template>
   <div class="gamekeyboard__key" :class="classObj" @click="emits('click', kkey)">
-    <ph-backspace v-if="kkey === ValidKey.BACKSPACE" :size="24" weight="fill"></ph-backspace>
+    <backspace-icon style="width: 30px" v-if="kkey === ValidKey.BACKSPACE"></backspace-icon>
     <span v-else>{{ kkey }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { PhBackspace } from "phosphor-vue"
+import { BackspaceIcon } from "@heroicons/vue/solid"
 import { type EvaluationState, ValidKey } from "@/utils/types"
 
 interface Props {

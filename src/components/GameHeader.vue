@@ -1,16 +1,16 @@
 <template>
   <main class="gameheader">
     <section class="gameheader__section">
-      <ph-question :size="28" @click="emits('openhelp')"></ph-question>
-      <ph-chart-bar :size="28" @click="emits('openstats')"></ph-chart-bar>
-      <ph-gear :size="28" @click="emits('opensettings')"></ph-gear>
-      <ph-arrow-counter-clockwise :size="28" @click="emits('reset')"></ph-arrow-counter-clockwise>
+      <question-mark-circle-icon @click="emits('openhelp')"></question-mark-circle-icon>
+      <chart-bar-icon @click="emits('openstats')"></chart-bar-icon>
+      <cog-icon @click="emits('opensettings')"></cog-icon>
+      <refresh-icon @click="emits('reset')"></refresh-icon>
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
-import { PhQuestion, PhGear, PhChartBar, PhArrowCounterClockwise } from "phosphor-vue"
+import { QuestionMarkCircleIcon, CogIcon, ChartBarIcon, RefreshIcon } from "@heroicons/vue/outline"
 
 const emits = defineEmits<{
   (e: "openhelp"): void
@@ -34,6 +34,7 @@ const emits = defineEmits<{
     color: var(--text-accent-color);
   }
   svg {
+    width: 28px;
     cursor: pointer;
     &:hover {
       opacity: 0.75;

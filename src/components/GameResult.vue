@@ -3,19 +3,12 @@
     <div class="gameresult__text">
       <div>
         <div class="gameresult__icon">
-          <ph-check-circle
+          <check-circle-icon
             v-if="result?.status === GameStatus.WIN"
-            :size="50"
-            weight="fill"
             class="gameresult__icon--correct"
-          ></ph-check-circle>
-          <ph-x-circle
-            v-else-if="result?.status === GameStatus.LOSS"
-            :size="50"
-            weight="fill"
-            class="gameresult__icon--wrong"
-          ></ph-x-circle>
-          <ph-minus-circle v-else :size="50" weight="fill" class="gameresult__icon--neutral"></ph-minus-circle>
+          ></check-circle-icon>
+          <x-circle-icon v-else-if="result?.status === GameStatus.LOSS" class="gameresult__icon--wrong"></x-circle-icon>
+          <minus-circle-icon v-else class="gameresult__icon--neutral"></minus-circle-icon>
         </div>
         <p v-if="result?.status === GameStatus.WIN" class="gameresult__heading">You Win!</p>
         <p v-else-if="result?.status === GameStatus.LOSS" class="gameresult__heading">You Lose!</p>
@@ -66,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { PhCheckCircle, PhXCircle, PhMinusCircle } from "phosphor-vue"
+import { CheckCircleIcon, XCircleIcon, MinusCircleIcon } from "@heroicons/vue/solid"
 import { type GameResult, GameStatus } from "@/utils/types"
 import { useStats } from "@/stores/stats"
 
@@ -98,12 +91,15 @@ const stats = useStats()
     display: flex;
     justify-content: center;
     &--correct {
+      width: 45px;
       color: var(--correct-color);
     }
     &--wrong {
+      width: 45px;
       color: var(--incorrect-color);
     }
     &--neutral {
+      width: 45px;
       color: var(--text-accent-color);
     }
   }

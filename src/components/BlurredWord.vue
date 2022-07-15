@@ -3,14 +3,14 @@
     <p :class="['blurredword__text', { blurredword__blurrytext: blurred }]">
       <slot></slot>
     </p>
-    <ph-eye v-if="blurred" @click="handleUnblur()" :size="28" class="blurredword__icon"></ph-eye>
-    <ph-eye-slash v-else @click="blurred = true" :size="28" class="blurredword__icon"></ph-eye-slash>
+    <eye-icon v-if="blurred" @click="handleUnblur()" class="blurredword__icon"></eye-icon>
+    <eye-off-icon v-else @click="blurred = true" class="blurredword__icon"></eye-off-icon>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { PhEye, PhEyeSlash } from "phosphor-vue"
+import { EyeIcon, EyeOffIcon } from "@heroicons/vue/outline"
 
 const emits = defineEmits<{
   (e: "unblur"): void
@@ -39,6 +39,7 @@ function handleUnblur() {
     filter: blur(10px);
   }
   &__icon {
+    width: 25px;
     color: var(--text-accent-color);
   }
   svg {
