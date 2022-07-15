@@ -3,14 +3,14 @@
     <div class="appfooter__container">
       <p class="appfooter__text">© {{ new Date().getFullYear() }} {{ creator }}</p>
       <a :href="githubLink" class="appfooter__text" target="_blank">
-        <ph-github-logo :size="28"></ph-github-logo>
+        <github-logo class="appfooter__icon"></github-logo>
       </a>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-import { PhGithubLogo } from "phosphor-vue"
+import GithubLogo from "@/components/GithubLogo.vue"
 
 const creator = "Jordan Shatford"
 const githubLink = "https://github.com/jordanshatford/vvurdle"
@@ -32,6 +32,9 @@ const githubLink = "https://github.com/jordanshatford/vvurdle"
   }
   &__text {
     color: var(--text-accent-color);
+  }
+  &__icon {
+    width: 2rem;
   }
 }
 </style>
