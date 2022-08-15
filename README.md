@@ -6,7 +6,7 @@
 [![Prettier](https://img.shields.io/badge/code--formatter-prettier-%23F7B93E?style=flat&logo=prettier)](https://prettier.io/)
 [![Eslint](https://img.shields.io/badge/linter-eslint-%234B32C3?style=flat&logo=eslint)](https://eslint.org/)
 [![Hosted On Vercel](https://img.shields.io/badge/hosted%20on-vercel-%23000000.svg?style=flat&logo=vercel)](https://vercel.com/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&logo=license)](https://github.com/jordanshatford/vvurdle/blob/main/LICENSE.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&logo=license)](https://github.com/jordanshatford/vvurdle/blob/main/LICENSE)
 
 VVurdle is [Wordle](https://www.nytimes.com/games/wordle/index.html) clone written in Vue.
 
