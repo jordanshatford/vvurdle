@@ -4,13 +4,13 @@
       <question-mark-circle-icon @click="emits('openhelp')"></question-mark-circle-icon>
       <chart-bar-icon @click="emits('openstats')"></chart-bar-icon>
       <cog-icon @click="emits('opensettings')"></cog-icon>
-      <refresh-icon @click="emits('reset')"></refresh-icon>
+      <arrow-path-icon @click="emits('reset')"></arrow-path-icon>
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
-import { QuestionMarkCircleIcon, CogIcon, ChartBarIcon, RefreshIcon } from "@heroicons/vue/outline"
+import { QuestionMarkCircleIcon, CogIcon, ChartBarIcon, ArrowPathIcon } from "@heroicons/vue/24/outline"
 
 const emits = defineEmits<{
   (e: "openhelp"): void

@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { CheckCircleIcon, XCircleIcon, MinusCircleIcon } from "@heroicons/vue/solid"
+import { CheckCircleIcon, XCircleIcon, MinusCircleIcon } from "@heroicons/vue/20/solid"
 import { type GameResult, GameStatus } from "@/utils/types"
 import { useStats } from "@/stores/stats"
 

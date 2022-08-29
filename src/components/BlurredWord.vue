@@ -4,13 +4,13 @@
       <slot></slot>
     </p>
     <eye-icon v-if="blurred" @click="handleUnblur()" class="blurredword__icon"></eye-icon>
-    <eye-off-icon v-else @click="blurred = true" class="blurredword__icon"></eye-off-icon>
+    <eye-slash-icon v-else @click="blurred = true" class="blurredword__icon"></eye-slash-icon>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { EyeIcon, EyeOffIcon } from "@heroicons/vue/outline"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
 
 const emits = defineEmits<{
   (e: "unblur"): void

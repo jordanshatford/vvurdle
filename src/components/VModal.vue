@@ -2,7 +2,7 @@
   <main class="vmodal">
     <section class="vmodal__section">
       <p class="vmodal__heading">{{ title }}</p>
-      <x-icon @click="emits('close')" class="vmodal__close"></x-icon>
+      <x-mark-icon @click="emits('close')" class="vmodal__close"></x-mark-icon>
       <slot></slot>
     </section>
   </main>
@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount } from "vue"
-import { XIcon } from "@heroicons/vue/outline"
+import { XMarkIcon } from "@heroicons/vue/24/outline"
 
 interface Props {
   title?: string

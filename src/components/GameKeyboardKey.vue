@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { BackspaceIcon } from "@heroicons/vue/solid"
+import { BackspaceIcon } from "@heroicons/vue/20/solid"
 import { type EvaluationState, ValidKey } from "@/utils/types"
 
 interface Props {
