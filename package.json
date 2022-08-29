@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@heroicons/vue": "^1.0.6",
+    "@heroicons/vue": "^2.0.8",
     "pinia": "^2.0.21",
     "vue": "^3.2.37",
     "wordlist-js": "^1.3.1"
