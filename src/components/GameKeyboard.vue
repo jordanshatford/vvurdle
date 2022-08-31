@@ -18,7 +18,7 @@ import GameKeyboardKey from "@/components/GameKeyboardKey.vue"
 import { ValidKey } from "@/utils/types"
 import type { Keyboard } from "@/utils/keyboard"
 
-interface Props {
+export interface Props {
   keyboard: Partial<Keyboard>
   disabled?: boolean
 }

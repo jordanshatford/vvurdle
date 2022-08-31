@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
+export interface Props {
   errors: string[]
 }
 

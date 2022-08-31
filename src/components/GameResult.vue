@@ -63,7 +63,7 @@ import { CheckCircleIcon, XCircleIcon, MinusCircleIcon } from "@heroicons/vue/20
 import { type GameResult, GameStatus } from "@/utils/types"
 import { useStats } from "@/stores/stats"
 
-interface Props {
+export interface Props {
   result: GameResult
 }
 

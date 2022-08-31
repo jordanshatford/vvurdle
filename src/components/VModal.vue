@@ -12,7 +12,7 @@
 import { onMounted, onBeforeUnmount } from "vue"
 import { XMarkIcon } from "@heroicons/vue/24/outline"
 
-interface Props {
+export interface Props {
   title?: string
 }
 

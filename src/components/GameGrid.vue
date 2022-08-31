@@ -16,7 +16,7 @@ import { computed } from "vue"
 import GameBoardCell from "@/components/GameGridCell.vue"
 import type { Board } from "@/utils/board"
 
-interface Props {
+export interface Props {
   board: Partial<Board>
 }
 

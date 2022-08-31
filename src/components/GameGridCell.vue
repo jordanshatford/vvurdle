@@ -11,7 +11,7 @@
 import { computed } from "vue"
 import { EvaluationState, ValidKey } from "@/utils/types"
 
-interface Props {
+export interface Props {
   value: ValidKey
   state: EvaluationState
 }

@@ -10,7 +10,7 @@ import { computed } from "vue"
 import { BackspaceIcon } from "@heroicons/vue/20/solid"
 import { type EvaluationState, ValidKey } from "@/utils/types"
 
-interface Props {
+export interface Props {
   kkey: ValidKey
   state: EvaluationState
 }

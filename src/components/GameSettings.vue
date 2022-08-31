@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import BlurredWord from "@/components/BlurredWord.vue"
 
-interface Props {
+export interface Props {
   word: string
   length: number
   availableLengths: number[]
