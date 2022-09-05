@@ -1,6 +1,6 @@
 <template>
   <div class="gamekeyboard__key" :class="classObj" @click="emits('click', kkey)">
-    <backspace-icon style="width: 30px" v-if="kkey === ValidKey.BACKSPACE"></backspace-icon>
+    <BackspaceIcon style="width: 30px" v-if="kkey === ValidKey.BACKSPACE" />
     <span v-else>{{ kkey }}</span>
   </div>
 </template>

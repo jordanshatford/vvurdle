@@ -3,8 +3,8 @@
     <p :class="['blurredword__text', { blurredword__blurrytext: blurred }]">
       <slot></slot>
     </p>
-    <eye-icon v-if="blurred" @click="handleUnblur()" class="blurredword__icon"></eye-icon>
-    <eye-slash-icon v-else @click="blurred = true" class="blurredword__icon"></eye-slash-icon>
+    <EyeIcon v-if="blurred" @click="handleUnblur()" class="blurredword__icon" />
+    <EyeSlashIcon v-else @click="blurred = true" class="blurredword__icon" />
   </div>
 </template>
 

@@ -1,12 +1,7 @@
 <template>
   <main class="gameboard">
     <section class="gameboard__content" :style="style">
-      <game-board-cell
-        v-for="(cell, index) in board.state"
-        :value="cell.value"
-        :state="cell.state"
-        :key="index"
-      ></game-board-cell>
+      <GameBoardCell v-for="(cell, index) in board.state" :value="cell.value" :state="cell.state" :key="index" />
     </section>
   </main>
 </template>

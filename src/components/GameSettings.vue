@@ -5,7 +5,7 @@
         <article class="gamesettings__settings__setting">
           <span>Current Word: </span>
           <span>
-            <blurred-word @unblur="emits('checkedword')">{{ word }}</blurred-word>
+            <BlurredWord @unblur="emits('checkedword')">{{ word }}</BlurredWord>
           </span>
         </article>
         <article class="gamesettings__settings__setting">

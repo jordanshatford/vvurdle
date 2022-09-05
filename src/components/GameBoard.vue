@@ -1,39 +1,39 @@
 <template>
   <transition name="fade-modal">
-    <v-modal v-if="showResultModal" @close="showResultModal = false">
-      <game-result :result="game.result" @playagain="playAgain"></game-result>
-    </v-modal>
+    <VModal v-if="showResultModal" @close="showResultModal = false">
+      <GameResult :result="game.result" @playagain="playAgain" />
+    </VModal>
   </transition>
   <transition name="fade-modal">
-    <v-modal v-if="showHelpModal" @close="showHelpModal = false" title="How to Play:">
-      <game-help></game-help>
-    </v-modal>
+    <VModal v-if="showHelpModal" @close="showHelpModal = false" title="How to Play:">
+      <GameHelp />
+    </VModal>
   </transition>
   <transition name="fade-modal">
-    <v-modal v-if="showSettingsModal" @close="showSettingsModal = false" title="Settings:">
-      <game-settings
+    <VModal v-if="showSettingsModal" @close="showSettingsModal = false" title="Settings:">
+      <GameSettings
         :word="game.word"
         v-model:length="game.length"
         :availableLengths="game.availableLengths"
         @checkedword="game.cheated = true"
-      ></game-settings>
-    </v-modal>
+      />
+    </VModal>
   </transition>
-  <game-errors :errors="game.errors"></game-errors>
-  <game-header
+  <GameErrors :errors="game.errors" />
+  <GameHeader
     @openhelp="showHelpModal = true"
     @openstats="showResultModal = true"
     @opensettings="showSettingsModal = true"
     @reset="game.reset"
-  ></game-header>
-  <game-grid :board="game.board"></game-grid>
-  <game-keyboard
+  />
+  <GameGrid :board="game.board" />
+  <GameKeyboard
     :keyboard="game.keyboard"
     :disabled="game.over"
     @backspace="game.handleBackspace"
     @enter="game.handleSubmit"
     @keypress="game.handleKeypress"
-  ></game-keyboard>
+  />
 </template>
 
 <script setup lang="ts">

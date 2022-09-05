@@ -3,12 +3,9 @@
     <div class="gameresult__text">
       <div>
         <div class="gameresult__icon">
-          <check-circle-icon
-            v-if="result?.status === GameStatus.WIN"
-            class="gameresult__icon--correct"
-          ></check-circle-icon>
-          <x-circle-icon v-else-if="result?.status === GameStatus.LOSS" class="gameresult__icon--wrong"></x-circle-icon>
-          <minus-circle-icon v-else class="gameresult__icon--neutral"></minus-circle-icon>
+          <CheckCircleIcon v-if="result?.status === GameStatus.WIN" class="gameresult__icon--correct" />
+          <XCircleIcon v-else-if="result?.status === GameStatus.LOSS" class="gameresult__icon--wrong" />
+          <MinusCircleIcon v-else class="gameresult__icon--neutral" />
         </div>
         <p v-if="result?.status === GameStatus.WIN" class="gameresult__heading">You Win!</p>
         <p v-else-if="result?.status === GameStatus.LOSS" class="gameresult__heading">You Lose!</p>

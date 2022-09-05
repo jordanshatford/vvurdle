@@ -1,10 +1,10 @@
 <template>
   <main class="gameheader">
     <section class="gameheader__section">
-      <question-mark-circle-icon @click="emits('openhelp')"></question-mark-circle-icon>
-      <chart-bar-icon @click="emits('openstats')"></chart-bar-icon>
-      <cog-icon @click="emits('opensettings')"></cog-icon>
-      <arrow-path-icon @click="emits('reset')"></arrow-path-icon>
+      <QuestionMarkCircleIcon @click="emits('openhelp')" />
+      <ChartBarIcon @click="emits('openstats')" />
+      <CogIcon @click="emits('opensettings')" />
+      <ArrowPathIcon @click="emits('reset')" />
     </section>
   </main>
 </template>

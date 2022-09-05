@@ -2,7 +2,7 @@
   <main class="vmodal">
     <section class="vmodal__section">
       <p class="vmodal__heading">{{ title }}</p>
-      <x-mark-icon @click="emits('close')" class="vmodal__close"></x-mark-icon>
+      <XMarkIcon @click="emits('close')" class="vmodal__close" />
       <slot></slot>
     </section>
   </main>

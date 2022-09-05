@@ -3,7 +3,7 @@
     <div class="appfooter__container">
       <p class="appfooter__text">© {{ new Date().getFullYear() }} {{ creator }}</p>
       <a :href="githubLink" class="appfooter__text" target="_blank">
-        <github-logo class="appfooter__icon"></github-logo>
+        <GithubLogo class="appfooter__icon" />
       </a>
     </div>
   </footer>
