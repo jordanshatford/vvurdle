@@ -10,13 +10,18 @@
 </template>
 
 <script setup lang="ts">
-import { QuestionMarkCircleIcon, CogIcon, ChartBarIcon, ArrowPathIcon } from "@heroicons/vue/24/outline"
+import {
+  QuestionMarkCircleIcon,
+  CogIcon,
+  ChartBarIcon,
+  ArrowPathIcon
+} from '@heroicons/vue/24/outline'
 
 const emits = defineEmits<{
-  (e: "openhelp"): void
-  (e: "openstats"): void
-  (e: "opensettings"): void
-  (e: "reset"): void
+  (e: 'openhelp'): void
+  (e: 'openstats'): void
+  (e: 'opensettings'): void
+  (e: 'reset'): void
 }>()
 </script>
 

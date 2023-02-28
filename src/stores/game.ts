@@ -1,15 +1,15 @@
-import { defineStore } from "pinia"
-import Keyboard from "@/utils/keyboard"
-import Board from "@/utils/board"
-import Wordle from "@/utils/wordle"
-import { GameStatus, type GameResult, type ValidKey } from "@/utils/types"
-import { watch } from "vue"
-import { useStats } from "./stats"
+import { defineStore } from 'pinia'
+import Keyboard from '@/utils/keyboard'
+import Board from '@/utils/board'
+import Wordle from '@/utils/wordle'
+import { GameStatus, type GameResult, type ValidKey } from '@/utils/types'
+import { watch } from 'vue'
+import { useStats } from './stats'
 
-export const LOCAL_STORAGE_KEY = "gamestate"
+export const LOCAL_STORAGE_KEY = 'gamestate'
 const DEFAULT_WORD_LENGTH = 5
 
-export const useGame = defineStore("game", {
+export const useGame = defineStore('game', {
   state: () => ({
     length: DEFAULT_WORD_LENGTH,
     availableLengths: [3, 4, 5, 6, 7, 8],
@@ -19,7 +19,7 @@ export const useGame = defineStore("game", {
     cheated: false,
     over: false,
     errors: [] as string[],
-    result: {} as GameResult,
+    result: {} as GameResult
   }),
   getters: {
     word: (state) => state.wordle.word,
@@ -33,7 +33,7 @@ export const useGame = defineStore("game", {
       return (w: string) => {
         return state.wordle.isCorrect(w)
       }
-    },
+    }
   },
   actions: {
     initialize() {
@@ -43,7 +43,7 @@ export const useGame = defineStore("game", {
         this.$patch(savedState)
       }
       if (import.meta.env.DEV) {
-        console.info("The word to guess is:", this.word)
+        console.info('The word to guess is:', this.word)
       }
       watch(
         () => [...this.errors],
@@ -66,10 +66,10 @@ export const useGame = defineStore("game", {
           this.evaluateInputtedWord(this.board.inputtedWord)
           this.board.currentRow++
         } else {
-          this.errors.unshift("Not a valid word!")
+          this.errors.unshift('Not a valid word!')
         }
       } else {
-        this.errors.unshift("Not enough letters in word!")
+        this.errors.unshift('Not enough letters in word!')
       }
     },
     handleKeypress(key: ValidKey) {
@@ -88,7 +88,7 @@ export const useGame = defineStore("game", {
           word: this.word,
           guesses: this.guesses,
           score: this.wordle.getScore(this.word.length, this.guesses),
-          cheated: this.cheated,
+          cheated: this.cheated
         }
         const stats = useStats()
         stats.addStats(result)
@@ -102,7 +102,7 @@ export const useGame = defineStore("game", {
           word: this.word,
           guesses: this.guesses,
           score: 0,
-          cheated: this.cheated,
+          cheated: this.cheated
         }
         const stats = useStats()
         stats.addStats(result)
@@ -121,11 +121,11 @@ export const useGame = defineStore("game", {
         this.result = {} as GameResult
         this.errors = []
         if (import.meta.env.DEV) {
-          console.info("The word to guess is:", this.word)
+          console.info('The word to guess is:', this.word)
         }
       } else {
-        this.errors.unshift("You must play the current game!")
+        this.errors.unshift('You must play the current game!')
       }
-    },
-  },
+    }
+  }
 })

@@ -9,30 +9,30 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount } from "vue"
-import { XMarkIcon } from "@heroicons/vue/24/outline"
+import { onMounted, onBeforeUnmount } from 'vue'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
 
 export interface Props {
   title?: string
 }
 
-withDefaults(defineProps<Props>(), { title: "" })
+withDefaults(defineProps<Props>(), { title: '' })
 
 const emits = defineEmits<{
-  (e: "close"): void
+  (e: 'close'): void
 }>()
 
 onMounted(() => {
-  window.addEventListener("keyup", handleKeyupEvent)
+  window.addEventListener('keyup', handleKeyupEvent)
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener("keyup", handleKeyupEvent)
+  window.removeEventListener('keyup', handleKeyupEvent)
 })
 
 const handleKeyupEvent = (event: KeyboardEvent) => {
-  if (event.code === "Escape") {
-    emits("close")
+  if (event.code === 'Escape') {
+    emits('close')
   }
 }
 </script>

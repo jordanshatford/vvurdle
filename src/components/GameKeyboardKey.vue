@@ -6,9 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import { BackspaceIcon } from "@heroicons/vue/20/solid"
-import { type EvaluationState, ValidKey } from "@/utils/types"
+import { computed } from 'vue'
+import { BackspaceIcon } from '@heroicons/vue/20/solid'
+import { type EvaluationState, ValidKey } from '@/utils/types'
 
 export interface Props {
   kkey: ValidKey
@@ -18,12 +18,12 @@ export interface Props {
 const props = defineProps<Props>()
 
 const emits = defineEmits<{
-  (e: "click", key: ValidKey): void
+  (e: 'click', key: ValidKey): void
 }>()
 
 const classObj = computed(() => {
   if ([ValidKey.ENTER, ValidKey.BACKSPACE].includes(props.kkey)) {
-    return "gamekeyboard__key--wide"
+    return 'gamekeyboard__key--wide'
   } else {
     return `gamekeyboard__key--${props.state}`
   }

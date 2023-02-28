@@ -7,11 +7,11 @@
 </template>
 
 <script setup lang="ts">
-import AppHeader from "@/components/AppHeader.vue"
-import AppFooter from "@/components/AppFooter.vue"
-import GameBoard from "@/components/GameBoard.vue"
-import { useGame, LOCAL_STORAGE_KEY } from "@/stores/game"
-import { useStats, LOCAL_STORAGE_KEY as STATS_LOCAL_STORAGE_KEY } from "@/stores/stats"
+import AppHeader from '@/components/AppHeader.vue'
+import AppFooter from '@/components/AppFooter.vue'
+import GameBoard from '@/components/GameBoard.vue'
+import { useGame, LOCAL_STORAGE_KEY } from '@/stores/game'
+import { useStats, LOCAL_STORAGE_KEY as STATS_LOCAL_STORAGE_KEY } from '@/stores/stats'
 
 const game = useGame()
 game.initialize()

@@ -1,15 +1,19 @@
 <template>
   <div
     class="gameboard__cell"
-    :class="[`gameboard__cell--${state}`, { 'gameboard__cell--animate': value }, { 'gameboard__cell--flip': flip }]"
+    :class="[
+      `gameboard__cell--${state}`,
+      { 'gameboard__cell--animate': value },
+      { 'gameboard__cell--flip': flip }
+    ]"
   >
     {{ value }}
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import { EvaluationState, ValidKey } from "@/utils/types"
+import { computed } from 'vue'
+import { EvaluationState, ValidKey } from '@/utils/types'
 
 export interface Props {
   value: ValidKey
@@ -19,9 +23,12 @@ export interface Props {
 const props = defineProps<Props>()
 
 const flip = computed<boolean>(() => {
-  return [EvaluationState.ABSENT, EvaluationState.PRESENT, EvaluationState.MULTIPLE, EvaluationState.CORRECT].includes(
-    props.state
-  )
+  return [
+    EvaluationState.ABSENT,
+    EvaluationState.PRESENT,
+    EvaluationState.MULTIPLE,
+    EvaluationState.CORRECT
+  ].includes(props.state)
 })
 </script>
 

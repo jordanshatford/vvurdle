@@ -1,4 +1,4 @@
-import { EvaluationState, ValidKey } from "./types"
+import { EvaluationState, ValidKey } from './types'
 
 interface KeyInfo {
   key: ValidKey
@@ -34,7 +34,7 @@ function initialize(): KeyInfo[] {
     ValidKey.B,
     ValidKey.N,
     ValidKey.M,
-    ValidKey.BACKSPACE,
+    ValidKey.BACKSPACE
   ]
   return keys.map((key) => {
     return { key, state: EvaluationState.UNKNOWN }

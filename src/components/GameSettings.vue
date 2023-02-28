@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import BlurredWord from "@/components/BlurredWord.vue"
+import BlurredWord from '@/components/BlurredWord.vue'
 
 export interface Props {
   word: string
@@ -38,12 +38,12 @@ export interface Props {
 defineProps<Props>()
 
 const emits = defineEmits<{
-  (e: "checkedword"): void
-  (e: "update:length", value: number): void
+  (e: 'checkedword'): void
+  (e: 'update:length', value: number): void
 }>()
 
 function emitUpdateLength(target: EventTarget | null) {
-  emits("update:length", Number((target as HTMLFormElement).value))
+  emits('update:length', Number((target as HTMLFormElement).value))
 }
 </script>
 

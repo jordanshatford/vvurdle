@@ -13,10 +13,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from "vue"
-import GameKeyboardKey from "@/components/GameKeyboardKey.vue"
-import { ValidKey } from "@/utils/types"
-import type { Keyboard } from "@/utils/keyboard"
+import { computed, onMounted, onUnmounted } from 'vue'
+import GameKeyboardKey from '@/components/GameKeyboardKey.vue'
+import { ValidKey } from '@/utils/types'
+import type { Keyboard } from '@/utils/keyboard'
 
 export interface Props {
   keyboard: Partial<Keyboard>
@@ -26,22 +26,26 @@ export interface Props {
 const props = defineProps<Props>()
 
 const emits = defineEmits<{
-  (e: "backspace"): void
-  (e: "enter"): void
-  (e: "keypress", key: ValidKey): void
+  (e: 'backspace'): void
+  (e: 'enter'): void
+  (e: 'keypress', key: ValidKey): void
 }>()
 
 onMounted(() => {
-  window.addEventListener("keyup", handleKeyupEvent)
+  window.addEventListener('keyup', handleKeyupEvent)
 })
 
 onUnmounted(() => {
-  window.removeEventListener("keyup", handleKeyupEvent)
+  window.removeEventListener('keyup', handleKeyupEvent)
 })
 
 const keyboardLayout = computed(() => {
   if (props.keyboard.state) {
-    return [props.keyboard.state.slice(0, 10), props.keyboard.state.slice(10, 19), props.keyboard.state.slice(19, 29)]
+    return [
+      props.keyboard.state.slice(0, 10),
+      props.keyboard.state.slice(10, 19),
+      props.keyboard.state.slice(19, 29)
+    ]
   }
   return []
 })
@@ -52,13 +56,13 @@ function handleKeypress(key: ValidKey) {
   }
   switch (key) {
     case ValidKey.BACKSPACE:
-      emits("backspace")
+      emits('backspace')
       break
     case ValidKey.ENTER:
-      emits("enter")
+      emits('enter')
       break
     default:
-      emits("keypress", key)
+      emits('keypress', key)
       break
   }
 }

@@ -37,16 +37,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue"
-import GameGrid from "@/components/GameGrid.vue"
-import GameKeyboard from "@/components/GameKeyboard.vue"
-import GameHeader from "@/components/GameHeader.vue"
-import GameHelp from "@/components/GameHelp.vue"
-import GameResult from "@/components/GameResult.vue"
-import GameSettings from "@/components/GameSettings.vue"
-import GameErrors from "@/components/GameErrors.vue"
-import VModal from "@/components/VModal.vue"
-import { useGame } from "@/stores/game"
+import { ref, watch } from 'vue'
+import GameGrid from '@/components/GameGrid.vue'
+import GameKeyboard from '@/components/GameKeyboard.vue'
+import GameHeader from '@/components/GameHeader.vue'
+import GameHelp from '@/components/GameHelp.vue'
+import GameResult from '@/components/GameResult.vue'
+import GameSettings from '@/components/GameSettings.vue'
+import GameErrors from '@/components/GameErrors.vue'
+import VModal from '@/components/VModal.vue'
+import { useGame } from '@/stores/game'
 
 const game = useGame()
 const showResultModal = ref<boolean>(false)

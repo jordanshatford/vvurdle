@@ -9,18 +9,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/24/outline"
+import { ref } from 'vue'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 
 const emits = defineEmits<{
-  (e: "unblur"): void
+  (e: 'unblur'): void
 }>()
 
 const blurred = ref(true)
 
 function handleUnblur() {
   blurred.value = false
-  emits("unblur")
+  emits('unblur')
 }
 </script>
 

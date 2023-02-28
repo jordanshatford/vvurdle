@@ -3,15 +3,24 @@
     <div class="gameresult__text">
       <div>
         <div class="gameresult__icon">
-          <CheckCircleIcon v-if="result?.status === GameStatus.WIN" class="gameresult__icon--correct" />
-          <XCircleIcon v-else-if="result?.status === GameStatus.LOSS" class="gameresult__icon--wrong" />
+          <CheckCircleIcon
+            v-if="result?.status === GameStatus.WIN"
+            class="gameresult__icon--correct"
+          />
+          <XCircleIcon
+            v-else-if="result?.status === GameStatus.LOSS"
+            class="gameresult__icon--wrong"
+          />
           <MinusCircleIcon v-else class="gameresult__icon--neutral" />
         </div>
         <p v-if="result?.status === GameStatus.WIN" class="gameresult__heading">You Win!</p>
         <p v-else-if="result?.status === GameStatus.LOSS" class="gameresult__heading">You Lose!</p>
         <p v-else class="gameresult__heading">Game In Progress!</p>
       </div>
-      <section v-if="[GameStatus.WIN, GameStatus.LOSS].includes(result.status)" class="gameresult__stats">
+      <section
+        v-if="[GameStatus.WIN, GameStatus.LOSS].includes(result.status)"
+        class="gameresult__stats"
+      >
         <p class="gameresult__stats__text">Game Stats:</p>
         <article class="gameresult__stats__stat">
           <span>Word:</span>
@@ -26,7 +35,9 @@
           <span>{{ result?.score }}</span>
         </article>
         <article v-if="result?.cheated" class="gameresult__stats__cheater">
-          <span>You cheated by looking at the word. This wont count towards your overall stats!</span>
+          <span
+            >You cheated by looking at the word. This wont count towards your overall stats!</span
+          >
         </article>
       </section>
       <section v-if="!result?.cheated" class="gameresult__stats">
@@ -56,9 +67,9 @@
 </template>
 
 <script setup lang="ts">
-import { CheckCircleIcon, XCircleIcon, MinusCircleIcon } from "@heroicons/vue/20/solid"
-import { type GameResult, GameStatus } from "@/utils/types"
-import { useStats } from "@/stores/stats"
+import { CheckCircleIcon, XCircleIcon, MinusCircleIcon } from '@heroicons/vue/20/solid'
+import { type GameResult, GameStatus } from '@/utils/types'
+import { useStats } from '@/stores/stats'
 
 export interface Props {
   result: GameResult
@@ -67,7 +78,7 @@ export interface Props {
 defineProps<Props>()
 
 const emits = defineEmits<{
-  (e: "playagain"): void
+  (e: 'playagain'): void
 }>()
 
 const stats = useStats()

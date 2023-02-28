@@ -1,4 +1,4 @@
-import { EvaluationState } from "@/utils/types"
+import { EvaluationState } from '@/utils/types'
 import {
   english10,
   english20,
@@ -11,8 +11,8 @@ import {
   american10,
   american20,
   american35,
-  american40,
-} from "wordlist-js"
+  american40
+} from 'wordlist-js'
 
 const allWords = [
   ...english10,
@@ -26,12 +26,12 @@ const allWords = [
   ...american10,
   ...american20,
   ...american35,
-  ...american40,
+  ...american40
 ]
 const uniqueWords = [...Array.from(new Set(allWords))].map((word) =>
   word
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
     .toUpperCase()
 )
 
@@ -71,8 +71,8 @@ export class Wordle {
   }
 
   public getEvaluations(inputWord: string): EvaluationState[] {
-    const inputArray = inputWord.split("")
-    const wordArray = this._word.split("")
+    const inputArray = inputWord.split('')
+    const wordArray = this._word.split('')
     const evaluations: EvaluationState[] = []
     inputArray.forEach((letter, lIndex) => {
       let evaluation = EvaluationState.UNKNOWN

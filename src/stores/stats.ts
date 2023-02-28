@@ -1,15 +1,15 @@
-import { GameStatus, type GameResult } from "@/utils/types"
-import { defineStore } from "pinia"
+import { GameStatus, type GameResult } from '@/utils/types'
+import { defineStore } from 'pinia'
 
-export const LOCAL_STORAGE_KEY = "gamestats"
+export const LOCAL_STORAGE_KEY = 'gamestats'
 
-export const useStats = defineStore("stats", {
+export const useStats = defineStore('stats', {
   state: () => ({
     currentStreak: 0,
     longestStreak: 0,
     totalGamesPlayed: 0,
     totalGamesWon: 0,
-    totalScore: 0,
+    totalScore: 0
   }),
   actions: {
     initialize() {
@@ -35,6 +35,6 @@ export const useStats = defineStore("stats", {
       } else {
         this.currentStreak = 0
       }
-    },
-  },
+    }
+  }
 })

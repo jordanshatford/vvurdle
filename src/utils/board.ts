@@ -1,4 +1,4 @@
-import { ValidKey, EvaluationState } from "@/utils/types"
+import { ValidKey, EvaluationState } from '@/utils/types'
 
 interface CellInfo {
   value: ValidKey
@@ -36,7 +36,7 @@ export class Board {
   }
 
   public get inputtedWord() {
-    let word = ""
+    let word = ''
     const startIndex = this.currentRow * this.width
     for (let i = startIndex; i < startIndex + this.width; i++) {
       word += this._state[i].value
@@ -45,7 +45,8 @@ export class Board {
   }
 
   public get currentRowComplete() {
-    const index = this.nextEmptyCellIndex === -1 ? this.width * this._height : this.nextEmptyCellIndex
+    const index =
+      this.nextEmptyCellIndex === -1 ? this.width * this._height : this.nextEmptyCellIndex
     const row = Math.floor((index - 1) / this.width)
     const isCurrentRow = row === this.currentRow
     const rowComplete = index % this.width === 0
@@ -67,7 +68,8 @@ export class Board {
     }
     const isCurrentRow = Math.floor((this.nextEmptyCellIndex - 1) / this.width) === this.currentRow
     if (isCurrentRow) {
-      const lastNonEmptyCell = this._state.filter((cell) => cell.value !== ValidKey.BLANK).length - 1
+      const lastNonEmptyCell =
+        this._state.filter((cell) => cell.value !== ValidKey.BLANK).length - 1
       this._state[lastNonEmptyCell].value = ValidKey.BLANK
     }
   }

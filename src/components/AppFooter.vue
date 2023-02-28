@@ -10,10 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import GithubLogo from "@/components/GithubLogo.vue"
+import GithubLogo from '@/components/GithubLogo.vue'
 
-const creator = "Jordan Shatford"
-const githubLink = "https://github.com/jordanshatford/vvurdle"
+const creator = 'Jordan Shatford'
+const githubLink = 'https://github.com/jordanshatford/vvurdle'
 </script>
 
 <style scoped lang="scss">

@@ -34,7 +34,9 @@
         <div class="gamehelp__squares__square gamehelp__squares__square--absent">E</div>
         <div class="gamehelp__squares__square gamehelp__squares__square--absent">R</div>
       </div>
-      <p>A yellow letter indicates that the letter is in the word, but not in that specific position.</p>
+      <p>
+        A yellow letter indicates that the letter is in the word, but not in that specific position.
+      </p>
       <div class="gamehelp__squares">
         <div class="gamehelp__squares__square gamehelp__squares__square--absent">V</div>
         <div class="gamehelp__squares__square gamehelp__squares__square--absent">A</div>
@@ -43,8 +45,8 @@
         <div class="gamehelp__squares__square gamehelp__squares__square--multiple">E</div>
       </div>
       <p>
-        A green and yellow letter indicates that the letter is in the correct spot, but there is also the same letter
-        somewhere else in the word.
+        A green and yellow letter indicates that the letter is in the correct spot, but there is
+        also the same letter somewhere else in the word.
       </p>
     </div>
   </main>
