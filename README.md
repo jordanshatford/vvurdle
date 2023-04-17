@@ -1,17 +1,36 @@
-# VVurdle
+<p align="center">
+  <br />
+  <img width="150" height="150" src="./public/icon.png" alt="Logo">
+  <h1 align="center"><b>VVurdle</b></h1>
+  <div align="center">
+    <a href="https://vuejs.org/">
+      <img src="https://img.shields.io/badge/Powered%20by-Vue-%234FC08D.svg?style=flat&logo=Vue.js" alt="Powered by Vue">
+    </a>
+    <a href="https://www.typescriptlang.org/">
+      <img src="https://img.shields.io/badge/Language-Typescript-%233178C6.svg?style=flat&logo=typescript" alt="Language: TypeScript">
+    </a>
+      <a href="https://sass-lang.com/)">
+      <img src="https://img.shields.io/badge/style-sass-%23CC6699?logo=sass" alt="Style Sass">
+    </a>
+    <a href="https://vercel.com/">
+      <img src="https://img.shields.io/badge/Hosted%20on-Vercel-%23000000.svg?style=flat&logo=vercel" alt="Hosted on Vercel">
+    </a>
+    <a href="https://github.com/jordanshatford/vvurdle/blob/main/LICENSE">
+      <img src="https://img.shields.io/badge/License-MIT-black.svg?style=flat&logo=license" alt="License: MIT">
+    </a>
+  </div>
+  <p align="center">
+    A Wordle clone written in Vue.js.
+    <br />
+    <a href="https://vvurdle.vercel.app/"><strong>vvurdle.vercel.app »</strong></a>
+    <br />
+    <br />
+  </p>
+</p>
 
-[![Powered By Vue](https://img.shields.io/badge/powered%20by-Vue-%234FC08D.svg?style=flat&logo=Vue.js)](https://vuejs.org/)
-[![Language: TypeScript](https://img.shields.io/badge/language-typescript-%233178C6.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Sass](https://img.shields.io/badge/style-sass-%23CC6699?logo=sass)](https://sass-lang.com/)
-[![Prettier](https://img.shields.io/badge/code--formatter-prettier-%23F7B93E?style=flat&logo=prettier)](https://prettier.io/)
-[![Eslint](https://img.shields.io/badge/linter-eslint-%234B32C3?style=flat&logo=eslint)](https://eslint.org/)
-[![Hosted On Vercel](https://img.shields.io/badge/hosted%20on-vercel-%23000000.svg?style=flat&logo=vercel)](https://vercel.com/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&logo=license)](https://github.com/jordanshatford/vvurdle/blob/main/LICENSE)
-
-VVurdle is [Wordle](https://www.nytimes.com/games/wordle/index.html) clone written in Vue.
-
-## Screenshot
-![readme-image](./src/assets/example.png)
+<p align="center">
+  <img src="./public/screenshot.png" alt="Screenshot">
+</p>
 
 ## More Information
 More information can be found in the respective doc in the docs folder.
