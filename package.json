@@ -13,7 +13,7 @@
   "dependencies": {
     "@heroicons/vue": "^2.0.18",
     "pinia": "^2.0.36",
-    "vue": "^3.3.2",
+    "vue": "^3.3.4",
     "wordlist-js": "^1.5.1"
   },
   "devDependencies": {
