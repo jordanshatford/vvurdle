@@ -12,16 +12,16 @@ The frontend also utilizes other technologies like:
 ### Without Docker
 To setup the frontend for local development you must first ensure that you have the following dependencies installed:
   - [NodeJS](https://nodejs.org/en/)
-  - [NPM](https://www.npmjs.com/package/npm)
+  - [PNPM](https://pnpm.io/)
 
 Now you can install the project specific dependencies using:
 ```bash
-npm install
+pnpm install
 ```
 
 Once the project dependencies are installed you can start a development server using:
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### With Docker
@@ -37,12 +37,12 @@ docker-compose up --build
 You can build a production version of the application using:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 ## Linting
 You can lint the project using:
 
 ```bash
-npm run lint
+pnpm run lint
 ```
