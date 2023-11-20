@@ -15,8 +15,8 @@ dependencies:
     specifier: ^3.3.8
     version: 3.3.8(typescript@5.2.2)
   wordlist-js:
-    specifier: ^1.5.1
-    version: 1.5.1
+    specifier: ^1.6.0
+    version: 1.6.0
 
 devDependencies:
   '@rushstack/eslint-patch':
@@ -2014,8 +2014,9 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /wordlist-js@1.5.1:
-    resolution: {integrity: sha512-q5GMmjX4u1xpoLWUmc2RcWu+k5jXzkrTPXlASeAQjnNbHyV7Rn4Zm2Z3SWaoz8FZTy4Ihs+atWhJTMJ4P4LzCA==}
+  /wordlist-js@1.6.0:
+    resolution: {integrity: sha512-qXjeErVnFkunkB601biygwmNZodJ0o7MBLgEAZ0eUwjiSbD1ZE+rzdFRqO3Mmx4stSV0ePTuLRClM7omVbt5iw==}
+    engines: {node: '>=18', pnpm: '>=8'}
     dev: false
 
   /wrappy@1.0.2:
