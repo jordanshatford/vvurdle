@@ -14,7 +14,7 @@
     "@heroicons/vue": "^2.0.18",
     "pinia": "^2.1.7",
     "vue": "^3.3.11",
-    "wordlist-js": "^1.8.0"
+    "wordlist-js": "^2.0.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.6.0",
