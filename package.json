@@ -11,9 +11,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.0.18",
+    "@heroicons/vue": "^2.1.1",
     "pinia": "^2.1.7",
-    "vue": "^3.3.11",
+    "vue": "^3.3.13",
     "wordlist-js": "^2.0.0"
   },
   "devDependencies": {
